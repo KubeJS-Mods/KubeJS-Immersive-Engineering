@@ -1,1 +1,1 @@
-# KubeJS-Immersive-Engineering
+# KubeJS-Thermal

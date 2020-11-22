@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[32,)"
+issueTrackerURL = "https://github.com/KubeJS-Mods/KubeJS-Thermal/issues"
+license = "GNU LGPLv3"
+
+[[mods]]
+modId = "kubejs_immersive_engineering"
+version = "${file.jarVersion}"
+displayName = "KubeJS Mekanism"
+authors = "LatvianModder"
+description = '''
+KubeJS Thermal Expansion integration
+'''
+license = "GNU LGPLv3"
+
+[[dependencies.kubejs_immersive_engineering]]
+modId = "kubejs"
+mandatory = true
+versionRange = "[1604,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.kubejs_immersive_engineering]]
+modId = "immersiveengineering"
+mandatory = true
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
