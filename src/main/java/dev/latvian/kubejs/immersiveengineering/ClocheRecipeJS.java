@@ -23,8 +23,9 @@ public class ClocheRecipeJS extends IERecipeJS
 	{
 		outputItems.addAll(parseResultItemList(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)));
+		inputItems.add(parseIngredientItem(args.get(2)));
 		json.addProperty("time", 640);
-		render(args.size() >= 3 ? args.get(2) : null);
+		render(args.size() >= 4 ? args.get(3) : null);
 	}
 
 	public ClocheRecipeJS render(@Nullable Object o)
