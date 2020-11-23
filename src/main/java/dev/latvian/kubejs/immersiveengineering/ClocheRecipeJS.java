@@ -66,6 +66,7 @@ public class ClocheRecipeJS extends IERecipeJS
 		}
 
 		serializeInputs = true;
+		save();
 		return this;
 	}
 

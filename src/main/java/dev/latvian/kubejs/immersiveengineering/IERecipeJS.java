@@ -30,7 +30,7 @@ public abstract class IERecipeJS extends RecipeJS
 		if (json.isJsonObject() && json.getAsJsonObject().has("base_ingredient"))
 		{
 			int c = json.getAsJsonObject().has("count") ? json.getAsJsonObject().get("count").getAsInt() : 1;
-			return IngredientJS.of(json.getAsJsonObject().get("base_ingredient")).asIngredientStack();
+			return IngredientJS.of(json.getAsJsonObject().get("base_ingredient")).count(c).asIngredientStack();
 		}
 
 		return IngredientJS.of(json).asIngredientStack();
@@ -39,6 +39,14 @@ public abstract class IERecipeJS extends RecipeJS
 	public IERecipeJS time(int t)
 	{
 		json.addProperty("time", t);
+		save();
+		return this;
+	}
+
+	public IERecipeJS energy(int e)
+	{
+		json.addProperty("energy", e);
+		save();
 		return this;
 	}
 }

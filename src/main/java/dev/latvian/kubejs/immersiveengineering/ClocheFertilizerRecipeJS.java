@@ -5,13 +5,20 @@ import dev.latvian.kubejs.util.ListJS;
 /**
  * @author LatvianModder
  */
-public class BlastFurnaceFuelRecipeJS extends IERecipeJS
+public class ClocheFertilizerRecipeJS extends IERecipeJS
 {
 	@Override
 	public void create(ListJS args)
 	{
 		inputItems.add(parseIngredientItem(args.get(0)));
-		json.addProperty("time", 300);
+		json.addProperty("growthModifier", 1F);
+	}
+
+	public ClocheFertilizerRecipeJS growthModifier(float f)
+	{
+		json.addProperty("growthModifier", f);
+		save();
+		return this;
 	}
 
 	@Override

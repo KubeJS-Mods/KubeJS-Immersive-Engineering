@@ -21,13 +21,13 @@ public class KubeJSImmersiveEngineering
 		event.register("immersiveengineering:blast_furnace_fuel", BlastFurnaceFuelRecipeJS::new);
 		event.register("immersiveengineering:coke_oven", CokeOvenRecipeJS::new);
 		event.register("immersiveengineering:cloche", ClocheRecipeJS::new);
-		//event.register("immersiveengineering:fertilizer", ClocheFertilizerSerializer::new);
+		event.register("immersiveengineering:fertilizer", ClocheFertilizerRecipeJS::new);
 		//event.register("immersiveengineering:blueprint", BlueprintCraftingRecipeSerializer::new);
 		event.register("immersiveengineering:metal_press", MetalPressRecipeJS::new);
-		//event.register("immersiveengineering:arc_furnace", ArcFurnaceRecipeSerializer::new);
+		event.register("immersiveengineering:arc_furnace", ArcFurnaceRecipeJS::new);
 		//event.register("immersiveengineering:bottling_machine", BottlingMachineRecipeSerializer::new);
 		event.register("immersiveengineering:crusher", CrusherRecipeJS::new);
-		//event.register("immersiveengineering:sawmill", SawmillRecipeSerializer::new);
+		event.register("immersiveengineering:sawmill", SawmillRecipeJS::new);
 		//event.register("immersiveengineering:fermenter", FermenterRecipeSerializer::new);
 		//event.register("immersiveengineering:squeezer", SqueezerRecipeSerializer::new);
 		//event.register("immersiveengineering:refinery", RefineryRecipeSerializer::new);
