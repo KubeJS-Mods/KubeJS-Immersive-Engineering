@@ -18,9 +18,9 @@ public class KubeJSImmersiveEngineering
 	{
 		event.register("immersiveengineering:alloy", AlloyRecipeJS::new);
 		event.register("immersiveengineering:blast_furnace", BlastFurnaceRecipeJS::new);
-		//event.register("immersiveengineering:blast_furnace_fuel", BlastFurnaceFuelSerializer::new);
+		event.register("immersiveengineering:blast_furnace_fuel", BlastFurnaceFuelRecipeJS::new);
 		event.register("immersiveengineering:coke_oven", CokeOvenRecipeJS::new);
-		//event.register("immersiveengineering:cloche", ClocheRecipeSerializer::new);
+		event.register("immersiveengineering:cloche", ClocheRecipeJS::new);
 		//event.register("immersiveengineering:fertilizer", ClocheFertilizerSerializer::new);
 		//event.register("immersiveengineering:blueprint", BlueprintCraftingRecipeSerializer::new);
 		event.register("immersiveengineering:metal_press", MetalPressRecipeJS::new);
@@ -33,7 +33,6 @@ public class KubeJSImmersiveEngineering
 		//event.register("immersiveengineering:refinery", RefineryRecipeSerializer::new);
 		//event.register("immersiveengineering:mixer", MixerRecipeSerializer::new);
 		//event.register("immersiveengineering:mineral_mix", MineralMixSerializer::new);
-		//event.register("immersiveengineering:generated_list", GeneratedListSerializer::new);
 
 		//event.register("immersivepetroleum:distillation", DistillationRecipeSerializer::new);
 		//event.register("immersivepetroleum:reservoirs", ReservoirTypeSerializer::new);
