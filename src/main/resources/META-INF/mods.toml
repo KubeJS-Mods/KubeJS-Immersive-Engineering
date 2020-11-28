@@ -1,12 +1,12 @@
 modLoader = "javafml"
 loaderVersion = "[32,)"
-issueTrackerURL = "https://github.com/KubeJS-Mods/KubeJS-Thermal/issues"
+issueTrackerURL = "https://github.com/KubeJS-Mods/KubeJS-Immersive-Engineering/issues"
 license = "GNU LGPLv3"
 
 [[mods]]
 modId = "kubejs_immersive_engineering"
 version = "${file.jarVersion}"
-displayName = "KubeJS Mekanism"
+displayName = "KubeJS Immersive Engineering"
 authors = "LatvianModder"
 description = '''
 KubeJS Thermal Expansion integration
