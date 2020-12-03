@@ -2,9 +2,12 @@ package dev.latvian.kubejs.immersiveengineering;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import dev.latvian.kubejs.item.ItemStackJS;
 import dev.latvian.kubejs.item.ingredient.IngredientJS;
 import dev.latvian.kubejs.item.ingredient.IngredientStackJS;
 import dev.latvian.kubejs.recipe.RecipeJS;
+
+import javax.annotation.Nullable;
 
 /**
  * @author LatvianModder
@@ -48,5 +51,16 @@ public abstract class IERecipeJS extends RecipeJS
 		json.addProperty("energy", e);
 		save();
 		return this;
+	}
+
+	@Override
+	public ItemStackJS parseResultItem(@Nullable Object o)
+	{
+		if (o instanceof JsonElement && ((JsonElement) o).isJsonObject() && ((JsonElement) o).getAsJsonObject().has("base_ingredient"))
+		{
+			return parseIngredientItemIE(((JsonElement) o).getAsJsonObject()).getFirst();
+		}
+
+		return super.parseResultItem(o);
 	}
 }
