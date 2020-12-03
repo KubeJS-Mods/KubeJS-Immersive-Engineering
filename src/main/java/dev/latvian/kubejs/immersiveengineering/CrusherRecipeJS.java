@@ -40,7 +40,12 @@ public class CrusherRecipeJS extends IERecipeJS
 				if (CraftingHelper.processConditions(o, "conditions"))
 				{
 					ItemStackJS stack = parseResultItem(o.get("output"));
-					stack.setChance(o.get("chance").getAsDouble());
+
+					if (o.has("chance"))
+					{
+						stack.setChance(o.get("chance").getAsDouble());
+					}
+
 					outputItems.add(stack);
 				}
 			}
