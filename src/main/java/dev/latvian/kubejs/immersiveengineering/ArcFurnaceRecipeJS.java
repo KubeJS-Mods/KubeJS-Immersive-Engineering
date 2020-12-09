@@ -17,7 +17,7 @@ public class ArcFurnaceRecipeJS extends IERecipeJS
 		outputItems.addAll(parseResultItemList(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)));
 
-		if (args.size() >= 2)
+		if (args.size() >= 3)
 		{
 			inputItems.addAll(parseIngredientItemList(args.get(2)));
 		}
