@@ -29,6 +29,7 @@ public class ArcFurnaceRecipeJS extends IERecipeJS
 		}
 
 		json.addProperty("time", 100);
+		json.addProperty("energy", 51200);
 	}
 
 	@Override
