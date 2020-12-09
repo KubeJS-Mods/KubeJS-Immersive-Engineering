@@ -27,6 +27,8 @@ public class ArcFurnaceRecipeJS extends IERecipeJS
 			outputItems.add(parseResultItem(args.get(3)));
 			hasSlag = true;
 		}
+
+		json.addProperty("time", 100);
 	}
 
 	@Override

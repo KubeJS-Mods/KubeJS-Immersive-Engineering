@@ -13,6 +13,7 @@ public class AlloyRecipeJS extends IERecipeJS
 		outputItems.add(parseResultItem(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)));
 		inputItems.add(parseIngredientItem(args.get(2)));
+		json.addProperty("time", 200);
 	}
 
 	@Override

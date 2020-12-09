@@ -11,7 +11,7 @@ public class ClocheFertilizerRecipeJS extends IERecipeJS
 	public void create(ListJS args)
 	{
 		inputItems.add(parseIngredientItem(args.get(0)));
-		json.addProperty("growthModifier", 1F);
+		json.addProperty("growthModifier", 1.25F);
 	}
 
 	public ClocheFertilizerRecipeJS growthModifier(float f)

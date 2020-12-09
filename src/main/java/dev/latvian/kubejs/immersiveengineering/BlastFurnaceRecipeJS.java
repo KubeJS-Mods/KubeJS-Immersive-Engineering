@@ -17,6 +17,8 @@ public class BlastFurnaceRecipeJS extends IERecipeJS
 		{
 			outputItems.add(parseResultItem(args.get(2)));
 		}
+
+		json.addProperty("time", 1200);
 	}
 
 	@Override
