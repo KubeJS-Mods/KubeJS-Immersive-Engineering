@@ -56,9 +56,14 @@ public abstract class IERecipeJS extends RecipeJS
 	@Override
 	public ItemStackJS parseResultItem(@Nullable Object o)
 	{
-		if (o instanceof JsonElement && ((JsonElement) o).isJsonObject() && ((JsonElement) o).getAsJsonObject().has("base_ingredient"))
+		if (o instanceof JsonElement && ((JsonElement) o).isJsonObject())
 		{
-			return parseIngredientItemIE(((JsonElement) o).getAsJsonObject()).getFirst();
+			JsonObject json = ((JsonElement) o).getAsJsonObject();
+
+			if (json.has("base_ingredient") || json.has("tag"))
+			{
+				return parseIngredientItemIE(json).getFirst();
+			}
 		}
 
 		return super.parseResultItem(o);
