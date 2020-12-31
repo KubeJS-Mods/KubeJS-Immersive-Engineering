@@ -11,8 +11,8 @@ public class AlloyRecipeJS extends IERecipeJS
 	public void create(ListJS args)
 	{
 		outputItems.add(parseResultItem(args.get(0)));
-		inputItems.add(parseIngredientItem(args.get(1)));
-		inputItems.add(parseIngredientItem(args.get(2)));
+		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
+		inputItems.add(parseIngredientItem(args.get(2)).asIngredientStack());
 		json.addProperty("time", 200);
 	}
 

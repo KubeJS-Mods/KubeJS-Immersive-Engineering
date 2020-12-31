@@ -11,7 +11,7 @@ public class CokeOvenRecipeJS extends IERecipeJS
 	public void create(ListJS args)
 	{
 		outputItems.add(parseResultItem(args.get(0)));
-		inputItems.add(parseIngredientItem(args.get(1)));
+		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
 		json.addProperty("creosote", 250);
 		json.addProperty("time", 900);
 	}

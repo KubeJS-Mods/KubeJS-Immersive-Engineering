@@ -15,11 +15,11 @@ public class ArcFurnaceRecipeJS extends IERecipeJS
 	public void create(ListJS args)
 	{
 		outputItems.addAll(parseResultItemList(args.get(0)));
-		inputItems.add(parseIngredientItem(args.get(1)));
+		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
 
 		if (args.size() >= 3)
 		{
-			inputItems.addAll(parseIngredientItemList(args.get(2)));
+			inputItems.addAll(parseIngredientItemStackList(args.get(2)));
 		}
 
 		if (args.size() >= 4)

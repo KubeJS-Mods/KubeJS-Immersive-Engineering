@@ -22,8 +22,8 @@ public class ClocheRecipeJS extends IERecipeJS
 	public void create(ListJS args)
 	{
 		outputItems.addAll(parseResultItemList(args.get(0)));
-		inputItems.add(parseIngredientItem(args.get(1)));
-		inputItems.add(parseIngredientItem(args.get(2)));
+		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
+		inputItems.add(parseIngredientItem(args.get(2)).asIngredientStack());
 		json.addProperty("time", 640);
 		render(args.size() >= 4 ? args.get(3) : null);
 	}

@@ -28,6 +28,12 @@ public abstract class IERecipeJS extends RecipeJS
 		return o;
 	}
 
+	@Override
+	public IngredientJS convertReplacedInput(int index, IngredientJS oldIngredient, IngredientJS newIngredient)
+	{
+		return newIngredient.asIngredientStack();
+	}
+
 	public IngredientStackJS parseIngredientItemIE(JsonElement json)
 	{
 		if (json.isJsonObject() && json.getAsJsonObject().has("base_ingredient"))
