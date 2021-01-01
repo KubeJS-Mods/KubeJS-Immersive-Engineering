@@ -1,6 +1,7 @@
 package dev.latvian.kubejs.immersiveengineering;
 
 import dev.latvian.kubejs.recipe.RegisterRecipeHandlersEvent;
+import dev.latvian.kubejs.recipe.minecraft.ShapedRecipeJS;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -16,6 +17,8 @@ public class KubeJSImmersiveEngineering
 	@SubscribeEvent
 	public static void registerRecipeHandlers(RegisterRecipeHandlersEvent event)
 	{
+		event.register("immersiveengineering:turn_and_copy", ShapedRecipeJS::new); // Yes this isnt the same but it should work
+
 		event.register("immersiveengineering:alloy", AlloyRecipeJS::new);
 		event.register("immersiveengineering:blast_furnace", BlastFurnaceRecipeJS::new);
 		event.register("immersiveengineering:blast_furnace_fuel", BlastFurnaceFuelRecipeJS::new);
