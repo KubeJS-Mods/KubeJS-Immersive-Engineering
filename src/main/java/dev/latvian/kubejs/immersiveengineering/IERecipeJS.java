@@ -1,5 +1,7 @@
 package dev.latvian.kubejs.immersiveengineering;
 
+import blusunrize.immersiveengineering.api.IEApi;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.latvian.kubejs.item.ItemStackJS;
@@ -39,7 +41,7 @@ public abstract class IERecipeJS extends RecipeJS
 		if (json.isJsonObject() && json.getAsJsonObject().has("base_ingredient"))
 		{
 			int c = json.getAsJsonObject().has("count") ? json.getAsJsonObject().get("count").getAsInt() : 1;
-			return IngredientJS.of(json.getAsJsonObject().get("base_ingredient")).count(c).asIngredientStack();
+			return IngredientJS.of(json.getAsJsonObject().get("base_ingredient")).withCount(c).asIngredientStack();
 		}
 
 		return IngredientJS.of(json).asIngredientStack();
@@ -68,7 +70,7 @@ public abstract class IERecipeJS extends RecipeJS
 
 			if (json.has("base_ingredient") || json.has("tag"))
 			{
-				return parseIngredientItemIE(json).getFirst();
+				return ItemStackJS.of(IEApi.getPreferredStackbyMod(IngredientWithSize.deserialize(json).getMatchingStacks()));
 			}
 		}
 
