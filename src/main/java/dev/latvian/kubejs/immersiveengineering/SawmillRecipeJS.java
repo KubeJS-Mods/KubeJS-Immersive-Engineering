@@ -68,12 +68,16 @@ public class SawmillRecipeJS extends IERecipeJS
 				{
 					ItemStackJS stack = parseResultItem(o.get("output"));
 
-					if (o.has("chance"))
+					if (!stack.isEmpty())
 					{
-						stack.setChance(o.get("chance").getAsDouble());
-					}
+						if (o.has("chance"))
+						{
+							stack.setChance(o.get("chance").getAsDouble());
+						}
 
-					outputItems.add(stack);
+						outputItems.add(stack);
+						stripping.add(o.has("stripping") && o.get("stripping").getAsBoolean());
+					}
 				}
 			}
 		}
