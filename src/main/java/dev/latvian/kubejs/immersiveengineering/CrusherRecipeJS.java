@@ -10,16 +10,13 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 /**
  * @author LatvianModder
  */
-public class CrusherRecipeJS extends IERecipeJS
-{
+public class CrusherRecipeJS extends IERecipeJS {
 	@Override
-	public void create(ListJS args)
-	{
+	public void create(ListJS args) {
 		outputItems.add(parseResultItem(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
 
-		if (args.size() >= 3)
-		{
+		if (args.size() >= 3) {
 			outputItems.addAll(parseResultItemList(args.get(2)));
 		}
 
@@ -27,22 +24,17 @@ public class CrusherRecipeJS extends IERecipeJS
 	}
 
 	@Override
-	public void deserialize()
-	{
+	public void deserialize() {
 		outputItems.add(parseResultItem(json.get("result")));
 
-		if (json.has("secondaries"))
-		{
-			for (JsonElement e : json.get("secondaries").getAsJsonArray())
-			{
+		if (json.has("secondaries")) {
+			for (JsonElement e : json.get("secondaries").getAsJsonArray()) {
 				JsonObject o = e.getAsJsonObject();
 
-				if (CraftingHelper.processConditions(o, "conditions"))
-				{
+				if (CraftingHelper.processConditions(o, "conditions")) {
 					ItemStackJS stack = parseResultItem(o.get("output"));
 
-					if (o.has("chance"))
-					{
+					if (o.has("chance")) {
 						stack.setChance(o.get("chance").getAsDouble());
 					}
 
@@ -55,18 +47,15 @@ public class CrusherRecipeJS extends IERecipeJS
 	}
 
 	@Override
-	public void serialize()
-	{
-		if (serializeOutputs)
-		{
+	public void serialize() {
+		if (serializeOutputs) {
 			json.add("result", outputItems.get(0).toResultJson());
 
 			JsonArray array = new JsonArray();
 
-			for (int i = 1; i < outputItems.size(); i++)
-			{
+			for (int i = 1; i < outputItems.size(); i++) {
 				JsonObject o = new JsonObject();
-				ItemStackJS is = outputItems.get(i).getCopy();
+				ItemStackJS is = outputItems.get(i).copy();
 				o.addProperty("chance", is.hasChance() ? is.getChance() : 1D);
 				is.removeChance();
 				o.add("output", is.toResultJson());
@@ -76,8 +65,7 @@ public class CrusherRecipeJS extends IERecipeJS
 			json.add("secondaries", array);
 		}
 
-		if (serializeInputs)
-		{
+		if (serializeInputs) {
 			json.add("input", inputItems.get(0).toJson());
 		}
 	}

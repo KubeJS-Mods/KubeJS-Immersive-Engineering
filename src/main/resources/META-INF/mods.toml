@@ -5,7 +5,7 @@ license = "GNU LGPLv3"
 
 [[mods]]
 modId = "kubejs_immersive_engineering"
-version = "${file.jarVersion}"
+version = "${version}"
 displayName = "KubeJS Immersive Engineering"
 authors = "LatvianModder"
 description = '''
@@ -16,7 +16,7 @@ license = "GNU LGPLv3"
 [[dependencies.kubejs_immersive_engineering]]
 modId = "kubejs"
 mandatory = true
-versionRange = "[1604,)"
+versionRange = "[1605.3.15-build.106,)"
 ordering = "AFTER"
 side = "BOTH"
 

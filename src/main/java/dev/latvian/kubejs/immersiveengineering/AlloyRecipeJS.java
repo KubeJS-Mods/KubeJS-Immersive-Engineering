@@ -5,11 +5,9 @@ import dev.latvian.kubejs.util.ListJS;
 /**
  * @author LatvianModder
  */
-public class AlloyRecipeJS extends IERecipeJS
-{
+public class AlloyRecipeJS extends IERecipeJS {
 	@Override
-	public void create(ListJS args)
-	{
+	public void create(ListJS args) {
 		outputItems.add(parseResultItem(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
 		inputItems.add(parseIngredientItem(args.get(2)).asIngredientStack());
@@ -17,23 +15,19 @@ public class AlloyRecipeJS extends IERecipeJS
 	}
 
 	@Override
-	public void deserialize()
-	{
+	public void deserialize() {
 		outputItems.add(parseResultItem(json.get("result")));
 		inputItems.add(parseIngredientItemIE(json.get("input0")));
 		inputItems.add(parseIngredientItemIE(json.get("input1")));
 	}
 
 	@Override
-	public void serialize()
-	{
-		if (serializeOutputs)
-		{
+	public void serialize() {
+		if (serializeOutputs) {
 			json.add("result", outputItems.get(0).toResultJson());
 		}
 
-		if (serializeInputs)
-		{
+		if (serializeInputs) {
 			json.add("input0", inputItems.get(0).toJson());
 			json.add("input1", inputItems.get(1).toJson());
 		}

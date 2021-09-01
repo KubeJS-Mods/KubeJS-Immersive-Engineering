@@ -14,38 +14,30 @@ import java.util.List;
 /**
  * @author LatvianModder
  */
-public class SawmillRecipeJS extends IERecipeJS
-{
+public class SawmillRecipeJS extends IERecipeJS {
 	public List<Boolean> stripping = new ArrayList<>();
 	public boolean hasStripped = false;
 
 	@Override
-	public void create(ListJS args)
-	{
+	public void create(ListJS args) {
 		outputItems.add(parseResultItem(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
 
-		if (args.size() >= 3)
-		{
-			for (Object o : ListJS.orSelf(args.get(2)))
-			{
+		if (args.size() >= 3) {
+			for (Object o : ListJS.orSelf(args.get(2))) {
 				MapJS m = MapJS.of(o);
 
-				if (m != null && m.containsKey("stripping") && m.containsKey("output"))
-				{
+				if (m != null && m.containsKey("stripping") && m.containsKey("output")) {
 					outputItems.add(parseResultItem(m.get("output")));
 					stripping.add((Boolean) m.get("stripping"));
-				}
-				else
-				{
+				} else {
 					outputItems.add(parseResultItem(o));
 					stripping.add(false);
 				}
 			}
 		}
 
-		if (args.size() >= 4)
-		{
+		if (args.size() >= 4) {
 			outputItems.add(parseResultItem(args.get(3)));
 			hasStripped = true;
 		}
@@ -54,24 +46,18 @@ public class SawmillRecipeJS extends IERecipeJS
 	}
 
 	@Override
-	public void deserialize()
-	{
+	public void deserialize() {
 		outputItems.add(parseResultItem(json.get("result")));
 
-		if (json.has("secondaries"))
-		{
-			for (JsonElement e : json.get("secondaries").getAsJsonArray())
-			{
+		if (json.has("secondaries")) {
+			for (JsonElement e : json.get("secondaries").getAsJsonArray()) {
 				JsonObject o = e.getAsJsonObject();
 
-				if (CraftingHelper.processConditions(o, "conditions"))
-				{
+				if (CraftingHelper.processConditions(o, "conditions")) {
 					ItemStackJS stack = parseResultItem(o.get("output"));
 
-					if (!stack.isEmpty())
-					{
-						if (o.has("chance"))
-						{
+					if (!stack.isEmpty()) {
+						if (o.has("chance")) {
 							stack.setChance(o.get("chance").getAsDouble());
 						}
 
@@ -86,18 +72,15 @@ public class SawmillRecipeJS extends IERecipeJS
 	}
 
 	@Override
-	public void serialize()
-	{
-		if (serializeOutputs)
-		{
+	public void serialize() {
+		if (serializeOutputs) {
 			json.add("result", outputItems.get(0).toResultJson());
 
 			JsonArray array = new JsonArray();
 
-			for (int i = 1; i < (outputItems.size() - (hasStripped ? 1 : 0)); i++)
-			{
+			for (int i = 1; i < (outputItems.size() - (hasStripped ? 1 : 0)); i++) {
 				JsonObject o = new JsonObject();
-				ItemStackJS is = outputItems.get(i).getCopy();
+				ItemStackJS is = outputItems.get(i).copy();
 				o.addProperty("stripping", stripping.get(i - 1));
 				o.add("output", is.toResultJson());
 				array.add(o);
@@ -105,14 +88,12 @@ public class SawmillRecipeJS extends IERecipeJS
 
 			json.add("secondaries", array);
 
-			if (hasStripped)
-			{
+			if (hasStripped) {
 				json.add("stripped", outputItems.get(outputItems.size() - 1).toResultJson());
 			}
 		}
 
-		if (serializeInputs)
-		{
+		if (serializeInputs) {
 			json.add("input", inputItems.get(0).toJson());
 		}
 	}

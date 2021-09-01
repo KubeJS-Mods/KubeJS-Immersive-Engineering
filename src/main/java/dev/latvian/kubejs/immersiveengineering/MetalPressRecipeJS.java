@@ -5,11 +5,9 @@ import dev.latvian.kubejs.util.ListJS;
 /**
  * @author LatvianModder
  */
-public class MetalPressRecipeJS extends IERecipeJS
-{
+public class MetalPressRecipeJS extends IERecipeJS {
 	@Override
-	public void create(ListJS args)
-	{
+	public void create(ListJS args) {
 		outputItems.add(parseResultItem(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
 		inputItems.add(parseIngredientItem(args.get(2)).asIngredientStack());
@@ -17,23 +15,19 @@ public class MetalPressRecipeJS extends IERecipeJS
 	}
 
 	@Override
-	public void deserialize()
-	{
+	public void deserialize() {
 		outputItems.add(parseResultItem(json.get("result")));
 		inputItems.add(parseIngredientItemIE(json.get("input")));
 		inputItems.add(parseIngredientItemIE(json.get("mold")));
 	}
 
 	@Override
-	public void serialize()
-	{
-		if (serializeOutputs)
-		{
+	public void serialize() {
+		if (serializeOutputs) {
 			json.add("result", outputItems.get(0).toResultJson());
 		}
 
-		if (serializeInputs)
-		{
+		if (serializeInputs) {
 			json.add("input", inputItems.get(0).toJson());
 			json.add("mold", inputItems.get(1).toJson());
 		}
