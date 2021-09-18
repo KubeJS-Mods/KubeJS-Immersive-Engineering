@@ -155,7 +155,7 @@ if (ENV.CURSEFORGE_KEY) {
 			mainArtifact(remapJar.archivePath)
 			relations {
 				requiredDependency 'kubejs-forge'
-				requiredDependency 'mekanism'
+				requiredDependency 'immersive-engineering'
 			}
 			changelog = getGitChangelog
 			changelogType = 'markdown'
