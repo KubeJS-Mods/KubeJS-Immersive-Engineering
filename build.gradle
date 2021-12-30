@@ -41,9 +41,9 @@ repositories {
 	}
 
 	maven {
-		url "https://www.cursemaven.com"
+		url "https://modmaven.dev/"
 		content {
-			includeGroup "curse.maven"
+			includeGroup "blusunrize.immersiveengineering"
 		}
 	}
 
@@ -62,8 +62,9 @@ dependencies {
 	forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
 	modApi "dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}"
-	modApi "curse.maven:immersive-engineering-231951:${project.immersive_engineering_file}"
-	modApi "curse.maven:immersive-petroleum-268250:${project.immersive_petroleum_file}"
+	modApi "blusunrize.immersiveengineering:ImmersiveEngineering:${project.ie_version}"
+
+	//modApi "curse.maven:immersive-petroleum-268250:3384353"
 }
 
 processResources {

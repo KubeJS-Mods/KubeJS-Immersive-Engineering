@@ -1,4 +1,4 @@
-package dev.latvian.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering;
 
 import net.minecraftforge.fml.common.Mod;
 

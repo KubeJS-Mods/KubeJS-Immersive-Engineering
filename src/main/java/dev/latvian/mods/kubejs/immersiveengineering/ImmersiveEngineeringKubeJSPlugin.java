@@ -1,8 +1,8 @@
-package dev.latvian.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering;
 
-import dev.latvian.kubejs.KubeJSPlugin;
-import dev.latvian.kubejs.recipe.RegisterRecipeHandlersEvent;
-import dev.latvian.kubejs.recipe.minecraft.ShapedRecipeJS;
+import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.recipe.RegisterRecipeHandlersEvent;
+import dev.latvian.mods.kubejs.recipe.minecraft.ShapedRecipeJS;
 
 public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
 	@Override

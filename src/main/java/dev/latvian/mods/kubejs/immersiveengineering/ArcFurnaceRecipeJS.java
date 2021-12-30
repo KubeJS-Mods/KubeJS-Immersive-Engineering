@@ -1,8 +1,8 @@
-package dev.latvian.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import dev.latvian.kubejs.util.ListJS;
+import dev.latvian.mods.kubejs.util.ListJS;
 
 /**
  * @author LatvianModder

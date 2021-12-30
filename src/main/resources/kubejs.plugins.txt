@@ -1,1 +1,1 @@
-dev.latvian.kubejs.immersiveengineering.ImmersiveEngineeringKubeJSPlugin
+ImmersiveEngineeringKubeJSPlugin

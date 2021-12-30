@@ -1,11 +1,11 @@
-package dev.latvian.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering;
 
 import blusunrize.immersiveengineering.api.crafting.ClocheRenderFunction;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import dev.latvian.kubejs.item.ItemStackJS;
-import dev.latvian.kubejs.util.ListJS;
-import dev.latvian.kubejs.util.MapJS;
+import dev.latvian.mods.kubejs.item.ItemStackJS;
+import dev.latvian.mods.kubejs.util.ListJS;
+import dev.latvian.mods.kubejs.util.MapJS;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 

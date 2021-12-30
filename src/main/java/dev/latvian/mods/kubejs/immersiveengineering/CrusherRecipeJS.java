@@ -1,10 +1,10 @@
-package dev.latvian.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import dev.latvian.kubejs.item.ItemStackJS;
-import dev.latvian.kubejs.util.ListJS;
+import dev.latvian.mods.kubejs.item.ItemStackJS;
+import dev.latvian.mods.kubejs.util.ListJS;
 import net.minecraftforge.common.crafting.CraftingHelper;
 
 /**
