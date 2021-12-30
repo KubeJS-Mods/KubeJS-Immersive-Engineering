@@ -1,6 +1,7 @@
 package dev.latvian.mods.kubejs.immersiveengineering;
 
 import dev.latvian.mods.kubejs.util.ListJS;
+import dev.latvian.mods.kubejs.util.UtilsJS;
 
 /**
  * @author LatvianModder
@@ -11,7 +12,7 @@ public class MetalPressRecipeJS extends IERecipeJS {
 		outputItems.add(parseResultItem(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
 		inputItems.add(parseIngredientItem(args.get(2)).asIngredientStack());
-		json.addProperty("energy", args.size() >= 4 ? ((Number) args.get(3)).intValue() : 2400);
+		json.addProperty("energy", args.size() >= 4 ? UtilsJS.parseInt(args.get(3), 2400) : 2400);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.item.ingredient.IngredientJS;
 import dev.latvian.mods.kubejs.item.ingredient.IngredientStackJS;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
+import net.minecraft.util.GsonHelper;
 
 import javax.annotation.Nullable;
 
@@ -33,9 +34,9 @@ public abstract class IERecipeJS extends RecipeJS {
 	}
 
 	public IngredientStackJS parseIngredientItemIE(JsonElement json) {
-		if (json.isJsonObject() && json.getAsJsonObject().has("base_ingredient")) {
-			int c = json.getAsJsonObject().has("count") ? json.getAsJsonObject().get("count").getAsInt() : 1;
-			return IngredientJS.of(json.getAsJsonObject().get("base_ingredient")).withCount(c).asIngredientStack();
+		if (json instanceof JsonObject obj && obj.has("base_ingredient")) {
+			int c = GsonHelper.getAsInt(obj, "count", 1);
+			return IngredientJS.of(obj.get("base_ingredient")).withCount(c).asIngredientStack();
 		}
 
 		return IngredientJS.of(json).asIngredientStack();
@@ -55,9 +56,7 @@ public abstract class IERecipeJS extends RecipeJS {
 
 	@Override
 	public ItemStackJS parseResultItem(@Nullable Object o) {
-		if (o instanceof JsonElement && ((JsonElement) o).isJsonObject()) {
-			JsonObject json = ((JsonElement) o).getAsJsonObject();
-
+		if (o instanceof JsonObject json) {
 			if (json.has("base_ingredient") || json.has("tag")) {
 				return ItemStackJS.of(IEApi.getPreferredStackbyMod(IngredientWithSize.deserialize(json).getMatchingStacks()));
 			}

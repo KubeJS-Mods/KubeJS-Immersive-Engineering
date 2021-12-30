@@ -34,8 +34,8 @@ public class ArcFurnaceRecipeJS extends IERecipeJS {
 		inputItems.add(parseIngredientItemIE(json.get("input")));
 
 		if (json.has("additives")) {
-			for (JsonElement e : json.get("additives").getAsJsonArray()) {
-				inputItems.add(parseIngredientItemIE(e));
+			for (var element : json.get("additives").getAsJsonArray()) {
+				inputItems.add(parseIngredientItemIE(element));
 			}
 		}
 
@@ -48,13 +48,13 @@ public class ArcFurnaceRecipeJS extends IERecipeJS {
 	@Override
 	public void serialize() {
 		if (serializeOutputs) {
-			JsonArray array = new JsonArray();
+			var results = new JsonArray();
 
 			for (int i = 0; i < (outputItems.size() - (hasSlag ? 1 : 0)); i++) {
-				array.add(outputItems.get(i).toResultJson());
+				results.add(outputItems.get(i).toResultJson());
 			}
 
-			json.add("results", array);
+			json.add("results", results);
 
 			if (hasSlag) {
 				json.add("slag", outputItems.get(outputItems.size() - 1).toResultJson());
@@ -64,13 +64,13 @@ public class ArcFurnaceRecipeJS extends IERecipeJS {
 		if (serializeInputs) {
 			json.add("input", inputItems.get(0).toJson());
 
-			JsonArray array = new JsonArray();
+			var additives = new JsonArray();
 
 			for (int i = 1; i < inputItems.size(); i++) {
-				array.add(inputItems.get(i).toJson());
+				additives.add(inputItems.get(i).toJson());
 			}
 
-			json.add("additives", array);
+			json.add("additives", additives);
 		}
 	}
 }
