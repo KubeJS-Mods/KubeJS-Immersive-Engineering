@@ -24,7 +24,7 @@ public class SawmillRecipeJS extends IERecipeJS {
 		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
 
 		if (args.size() >= 3) {
-			for (Object o : ListJS.orSelf(args.get(2))) {
+			for (var o : ListJS.orSelf(args.get(2))) {
 				MapJS m = MapJS.of(o);
 
 				if (m != null && m.containsKey("stripping") && m.containsKey("output")) {
@@ -50,19 +50,19 @@ public class SawmillRecipeJS extends IERecipeJS {
 		outputItems.add(parseResultItem(json.get("result")));
 
 		if (json.has("secondaries")) {
-			for (JsonElement e : json.get("secondaries").getAsJsonArray()) {
-				JsonObject o = e.getAsJsonObject();
+			for (var element : json.get("secondaries").getAsJsonArray()) {
+				JsonObject secondary = element.getAsJsonObject();
 
-				if (CraftingHelper.processConditions(o, "conditions")) {
-					ItemStackJS stack = parseResultItem(o.get("output"));
+				if (CraftingHelper.processConditions(secondary, "conditions")) {
+					ItemStackJS stack = parseResultItem(secondary.get("output"));
 
 					if (!stack.isEmpty()) {
-						if (o.has("chance")) {
-							stack.setChance(o.get("chance").getAsDouble());
+						if (secondary.has("chance")) {
+							stack.setChance(secondary.get("chance").getAsDouble());
 						}
 
 						outputItems.add(stack);
-						stripping.add(o.has("stripping") && o.get("stripping").getAsBoolean());
+						stripping.add(secondary.has("stripping") && secondary.get("stripping").getAsBoolean());
 					}
 				}
 			}
@@ -76,17 +76,17 @@ public class SawmillRecipeJS extends IERecipeJS {
 		if (serializeOutputs) {
 			json.add("result", outputItems.get(0).toResultJson());
 
-			JsonArray array = new JsonArray();
+			var secondaries = new JsonArray();
 
 			for (int i = 1; i < (outputItems.size() - (hasStripped ? 1 : 0)); i++) {
 				JsonObject o = new JsonObject();
 				ItemStackJS is = outputItems.get(i).copy();
 				o.addProperty("stripping", stripping.get(i - 1));
 				o.add("output", is.toResultJson());
-				array.add(o);
+				secondaries.add(o);
 			}
 
-			json.add("secondaries", array);
+			json.add("secondaries", secondaries);
 
 			if (hasStripped) {
 				json.add("stripped", outputItems.get(outputItems.size() - 1).toResultJson());

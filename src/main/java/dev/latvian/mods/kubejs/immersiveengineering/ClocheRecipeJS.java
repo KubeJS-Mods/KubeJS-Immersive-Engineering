@@ -2,7 +2,7 @@ package dev.latvian.mods.kubejs.immersiveengineering;
 
 import blusunrize.immersiveengineering.api.crafting.ClocheRenderFunction;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.util.ListJS;
 import dev.latvian.mods.kubejs.util.MapJS;
@@ -30,16 +30,8 @@ public class ClocheRecipeJS extends IERecipeJS {
 		renderReference = null;
 
 		try {
-			if (o instanceof JsonElement) {
-				renderReference = ClocheRenderFunction.ClocheRenderReference.deserialize(((JsonElement) o).getAsJsonObject());
-			} else {
-				MapJS m = MapJS.of(o);
-
-				if (m != null) {
-					renderReference = ClocheRenderFunction.ClocheRenderReference.deserialize(m.toJson());
-				}
-			}
-		} catch (Exception ex) {
+			renderReference = ClocheRenderFunction.ClocheRenderReference.deserialize(MapJS.json(o));
+		} catch (Exception ignored) {
 		}
 
 		if (renderReference == null) {
@@ -70,13 +62,13 @@ public class ClocheRecipeJS extends IERecipeJS {
 	@Override
 	public void serialize() {
 		if (serializeOutputs) {
-			JsonArray array = new JsonArray();
+			var results = new JsonArray();
 
 			for (ItemStackJS is : outputItems) {
-				array.add(is.toResultJson());
+				results.add(is.toResultJson());
 			}
 
-			json.add("results", array);
+			json.add("results", results);
 		}
 
 		if (serializeInputs) {

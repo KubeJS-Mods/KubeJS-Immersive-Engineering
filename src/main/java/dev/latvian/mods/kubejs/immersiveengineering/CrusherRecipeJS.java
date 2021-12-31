@@ -28,14 +28,14 @@ public class CrusherRecipeJS extends IERecipeJS {
 		outputItems.add(parseResultItem(json.get("result")));
 
 		if (json.has("secondaries")) {
-			for (JsonElement e : json.get("secondaries").getAsJsonArray()) {
-				JsonObject o = e.getAsJsonObject();
+			for (var element : json.get("secondaries").getAsJsonArray()) {
+				var secondary = element.getAsJsonObject();
 
-				if (CraftingHelper.processConditions(o, "conditions")) {
-					ItemStackJS stack = parseResultItem(o.get("output"));
+				if (CraftingHelper.processConditions(secondary, "conditions")) {
+					ItemStackJS stack = parseResultItem(secondary.get("output"));
 
-					if (o.has("chance")) {
-						stack.setChance(o.get("chance").getAsDouble());
+					if (secondary.has("chance")) {
+						stack.setChance(secondary.get("chance").getAsDouble());
 					}
 
 					outputItems.add(stack);
@@ -51,7 +51,7 @@ public class CrusherRecipeJS extends IERecipeJS {
 		if (serializeOutputs) {
 			json.add("result", outputItems.get(0).toResultJson());
 
-			JsonArray array = new JsonArray();
+			var secondaries = new JsonArray();
 
 			for (int i = 1; i < outputItems.size(); i++) {
 				JsonObject o = new JsonObject();
@@ -59,10 +59,10 @@ public class CrusherRecipeJS extends IERecipeJS {
 				o.addProperty("chance", is.hasChance() ? is.getChance() : 1D);
 				is.removeChance();
 				o.add("output", is.toResultJson());
-				array.add(o);
+				secondaries.add(o);
 			}
 
-			json.add("secondaries", array);
+			json.add("secondaries", secondaries);
 		}
 
 		if (serializeInputs) {
