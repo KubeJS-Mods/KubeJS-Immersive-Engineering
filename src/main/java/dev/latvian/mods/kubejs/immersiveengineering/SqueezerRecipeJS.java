@@ -12,8 +12,8 @@ import net.minecraftforge.fluids.FluidStack;
 public class SqueezerRecipeJS extends IERecipeJS {
 
 	public SqueezerRecipeJS() {
-		outputFluids.set(0, FluidStack.EMPTY);
-		outputItems.set(0, ItemStackJS.EMPTY);
+		outputFluids.add(0, FluidStack.EMPTY);
+		outputItems.add(0, ItemStackJS.EMPTY);
 	}
 
 	@Override
