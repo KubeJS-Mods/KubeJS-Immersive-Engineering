@@ -22,9 +22,9 @@ public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
 		event.register("immersiveengineering:crusher", CrusherRecipeJS::new);
 		event.register("immersiveengineering:sawmill", SawmillRecipeJS::new);
 		//event.register("immersiveengineering:fermenter", FermenterRecipeSerializer::new);
-		//event.register("immersiveengineering:squeezer", SqueezerRecipeSerializer::new);
+		event.register("immersiveengineering:squeezer", SqueezerRecipeJS::new);
 		//event.register("immersiveengineering:refinery", RefineryRecipeSerializer::new);
-		//event.register("immersiveengineering:mixer", MixerRecipeSerializer::new);
+		event.register("immersiveengineering:mixer", MixerRecipeJS::new);
 		//event.register("immersiveengineering:mineral_mix", MineralMixSerializer::new);
 
 		//event.register("immersivepetroleum:distillation", DistillationRecipeSerializer::new);
