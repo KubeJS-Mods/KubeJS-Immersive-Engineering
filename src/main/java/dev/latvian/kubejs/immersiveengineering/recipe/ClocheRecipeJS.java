@@ -1,4 +1,4 @@
-package dev.latvian.kubejs.immersiveengineering;
+package dev.latvian.kubejs.immersiveengineering.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.ClocheRenderFunction;
 import com.google.gson.JsonArray;
