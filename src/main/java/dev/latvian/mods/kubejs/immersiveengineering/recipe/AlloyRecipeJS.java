@@ -1,29 +1,24 @@
-package dev.latvian.mods.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import dev.latvian.mods.kubejs.util.ListJS;
 
 /**
  * @author LatvianModder
  */
-public class CokeOvenRecipeJS extends IERecipeJS {
+public class AlloyRecipeJS extends IERecipeJS {
 	@Override
 	public void create(ListJS args) {
 		outputItems.add(parseResultItem(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
-		json.addProperty("creosote", 250);
-		json.addProperty("time", 900);
-	}
-
-	public CokeOvenRecipeJS creosote(int c) {
-		json.addProperty("creosote", c);
-		save();
-		return this;
+		inputItems.add(parseIngredientItem(args.get(2)).asIngredientStack());
+		json.addProperty("time", 200);
 	}
 
 	@Override
 	public void deserialize() {
 		outputItems.add(parseResultItem(json.get("result")));
-		inputItems.add(parseIngredientItemIE(json.get("input")));
+		inputItems.add(parseIngredientItemIE(json.get("input0")));
+		inputItems.add(parseIngredientItemIE(json.get("input1")));
 	}
 
 	@Override
@@ -33,7 +28,8 @@ public class CokeOvenRecipeJS extends IERecipeJS {
 		}
 
 		if (serializeInputs) {
-			json.add("input", inputItems.get(0).toJson());
+			json.add("input0", inputItems.get(0).toJson());
+			json.add("input1", inputItems.get(1).toJson());
 		}
 	}
 }

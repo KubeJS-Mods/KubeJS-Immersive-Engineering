@@ -1,4 +1,4 @@
-package dev.latvian.mods.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import dev.latvian.mods.kubejs.util.ListJS;
 

@@ -1,10 +1,32 @@
 package dev.latvian.mods.kubejs.immersiveengineering;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.immersiveengineering.event.MultiblockFormEventJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.AlloyRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.ArcFurnaceRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.BlastFurnaceFuelRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.BlastFurnaceRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.ClocheFertilizerRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.ClocheRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.CokeOvenRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.CrusherRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.MetalPressRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.MixerRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.SawmillRecipeJS;
+import dev.latvian.mods.kubejs.immersiveengineering.recipe.SqueezerRecipeJS;
 import dev.latvian.mods.kubejs.recipe.RegisterRecipeHandlersEvent;
 import dev.latvian.mods.kubejs.recipe.minecraft.ShapedRecipeJS;
+import dev.latvian.mods.kubejs.script.ScriptType;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
+	@Override
+	public void init() {
+		MinecraftForge.EVENT_BUS.register(this);
+	}
+
 	@Override
 	public void addRecipes(RegisterRecipeHandlersEvent event) {
 		event.register("immersiveengineering:turn_and_copy", ShapedRecipeJS::new); // Yes this isnt the same but it should work
@@ -29,5 +51,12 @@ public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
 
 		//event.register("immersivepetroleum:distillation", DistillationRecipeSerializer::new);
 		//event.register("immersivepetroleum:reservoirs", ReservoirTypeSerializer::new);
+	}
+
+	@SubscribeEvent
+	public void onMultiblockForm(MultiblockHandler.MultiblockFormEvent event) {
+		if (new MultiblockFormEventJS(event).post(ScriptType.SERVER, MultiblockFormEventJS.ID)) {
+			event.setCanceled(true);
+		}
 	}
 }
