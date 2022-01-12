@@ -1,4 +1,4 @@
-package dev.latvian.mods.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import dev.architectury.hooks.fluid.forge.FluidStackHooksForge;

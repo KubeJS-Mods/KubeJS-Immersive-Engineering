@@ -1,29 +1,29 @@
-package dev.latvian.mods.kubejs.immersiveengineering;
+package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
-import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.util.ListJS;
-import dev.latvian.mods.kubejs.util.UtilsJS;
 
 /**
  * @author LatvianModder
  */
-public class MetalPressRecipeJS extends IERecipeJS {
-
-	ItemStackJS mold = ItemStackJS.EMPTY;
-
+public class CokeOvenRecipeJS extends IERecipeJS {
 	@Override
 	public void create(ListJS args) {
 		outputItems.add(parseResultItem(args.get(0)));
 		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
-		mold = parseResultItem(args.get(2));
-		json.addProperty("energy", args.size() >= 4 ? UtilsJS.parseInt(args.get(3), 2400) : 2400);
+		json.addProperty("creosote", 250);
+		json.addProperty("time", 900);
+	}
+
+	public CokeOvenRecipeJS creosote(int c) {
+		json.addProperty("creosote", c);
+		save();
+		return this;
 	}
 
 	@Override
 	public void deserialize() {
 		outputItems.add(parseResultItem(json.get("result")));
 		inputItems.add(parseIngredientItemIE(json.get("input")));
-		mold = parseResultItem(json.get("mold"));
 	}
 
 	@Override
@@ -34,7 +34,6 @@ public class MetalPressRecipeJS extends IERecipeJS {
 
 		if (serializeInputs) {
 			json.add("input", inputItems.get(0).toJson());
-			json.addProperty("mold", mold.getId());
 		}
 	}
 }
