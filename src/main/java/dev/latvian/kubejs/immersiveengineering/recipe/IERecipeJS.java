@@ -1,4 +1,4 @@
-package dev.latvian.kubejs.immersiveengineering;
+package dev.latvian.kubejs.immersiveengineering.recipe;
 
 import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
