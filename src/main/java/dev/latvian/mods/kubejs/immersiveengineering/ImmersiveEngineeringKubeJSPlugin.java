@@ -55,6 +55,7 @@ public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
 
 	@SubscribeEvent
 	public void onMultiblockForm(MultiblockHandler.MultiblockFormEvent event) {
+		if(event.getPlayer().getLevel().isClientSide) return;
 		if (new MultiblockFormEventJS(event).post(ScriptType.SERVER, MultiblockFormEventJS.ID)) {
 			event.setCanceled(true);
 		}
