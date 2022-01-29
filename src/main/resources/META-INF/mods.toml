@@ -16,7 +16,7 @@ license = "GNU LGPLv3"
 [[dependencies.kubejs_immersive_engineering]]
 modId = "kubejs"
 mandatory = true
-versionRange = "[1801.4.1-build.271,)"
+versionRange = "[1801.4.2-,)"
 ordering = "AFTER"
 side = "BOTH"
 
