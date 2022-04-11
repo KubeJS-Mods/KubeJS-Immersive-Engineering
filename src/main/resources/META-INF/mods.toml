@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[38,)"
+loaderVersion = "[40,)"
 issueTrackerURL = "https://github.com/KubeJS-Mods/KubeJS-Immersive-Engineering/issues"
 license = "GNU LGPLv3"
 
@@ -9,14 +9,14 @@ version = "${version}"
 displayName = "KubeJS Immersive Engineering"
 authors = "LatvianModder"
 description = '''
-KubeJS Thermal Expansion integration
+KubeJS integration for Immersive Engineering.
 '''
 license = "GNU LGPLv3"
 
 [[dependencies.kubejs_immersive_engineering]]
 modId = "kubejs"
 mandatory = true
-versionRange = "[1801.4.2-,)"
+versionRange = "[1802.5.1-build.331,)"
 ordering = "AFTER"
 side = "BOTH"
 

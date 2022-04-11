@@ -6,6 +6,7 @@ import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.util.ListJS;
 import dev.latvian.mods.kubejs.util.MapJS;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class SawmillRecipeJS extends IERecipeJS {
 			for (var element : json.get("secondaries").getAsJsonArray()) {
 				JsonObject secondary = element.getAsJsonObject();
 
-				if (CraftingHelper.processConditions(secondary, "conditions")) {
+				if (CraftingHelper.processConditions(secondary, "conditions", ICondition.IContext.EMPTY)) {
 					ItemStackJS stack = parseResultItem(secondary.get("output"));
 
 					if (!stack.isEmpty()) {

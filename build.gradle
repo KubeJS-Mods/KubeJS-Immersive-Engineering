@@ -65,7 +65,7 @@ dependencies {
 	modApi "dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}"
 	modApi "blusunrize.immersiveengineering:ImmersiveEngineering:${project.ie_version}"
 
-	modLocalRuntime "me.shedaniel:RoughlyEnoughItems-forge:7.+"
+	modLocalRuntime "me.shedaniel:RoughlyEnoughItems-forge:8.+"
 
 	//modApi "curse.maven:immersive-petroleum-268250:3384353"
 }
