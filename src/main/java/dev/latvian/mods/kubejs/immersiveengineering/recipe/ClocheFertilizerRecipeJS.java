@@ -1,14 +1,18 @@
 package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
+import dev.latvian.mods.kubejs.recipe.IngredientMatch;
+import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
+import dev.latvian.mods.kubejs.recipe.RecipeArguments;
 import dev.latvian.mods.kubejs.util.ListJS;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * @author LatvianModder
  */
 public class ClocheFertilizerRecipeJS extends IERecipeJS {
 	@Override
-	public void create(ListJS args) {
-		inputItems.add(parseIngredientItem(args.get(0)).asIngredientStack());
+	public void create(RecipeArguments args) {
+		inputItems.add(parseItemInput(args.get(0)));
 		json.addProperty("growthModifier", 1.25F);
 	}
 
@@ -20,7 +24,7 @@ public class ClocheFertilizerRecipeJS extends IERecipeJS {
 
 	@Override
 	public void deserialize() {
-		inputItems.add(parseIngredientItemIE(json.get("input")));
+		inputItems.add(parseItemInputIE(json.get("input")));
 	}
 
 	@Override
@@ -28,5 +32,16 @@ public class ClocheFertilizerRecipeJS extends IERecipeJS {
 		if (serializeInputs) {
 			json.add("input", inputItems.get(0).toJson());
 		}
+	}
+
+
+	@Override
+	public boolean hasOutput(IngredientMatch match) {
+		return false;
+	}
+
+	@Override
+	public boolean replaceOutput(IngredientMatch match, ItemStack with, ItemOutputTransformer transformer) {
+		return false;
 	}
 }
