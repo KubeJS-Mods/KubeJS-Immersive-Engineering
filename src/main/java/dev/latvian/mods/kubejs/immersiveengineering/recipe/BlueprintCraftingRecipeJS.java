@@ -42,11 +42,11 @@ public class BlueprintCraftingRecipeJS extends IERecipeJS {
         }
 
         if (serializeInputs) {
-            var jsonOutputs = new JsonArray();
+            var jsonInputs = new JsonArray();
             for (var ingredient : inputItems) {
-                jsonOutputs.add(serializeIngredientStack(ingredient.kjs$asStack()));
+                jsonInputs.add(serializeIngredientStack(ingredient.kjs$asStack()));
             }
-            json.add("inputs", jsonOutputs);
+            json.add("inputs", jsonInputs);
         }
     }
 }

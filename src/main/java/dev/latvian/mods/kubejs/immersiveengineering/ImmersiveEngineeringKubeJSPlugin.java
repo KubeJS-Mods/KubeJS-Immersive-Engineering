@@ -33,7 +33,7 @@ public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
 		event.register(BlastFurnaceFuel.SERIALIZER.getId(), BlastFurnaceFuelRecipeJS::new);
 		event.register(BlastFurnaceRecipe.SERIALIZER.getId(), BlastFurnaceRecipeJS::new);
 		event.register(BlueprintCraftingRecipe.SERIALIZER.getId(), BlueprintCraftingRecipeJS::new);
-		//event.register("immersiveengineering:bottling_machine", BottlingMachineRecipeSerializer::new);
+		event.register(BottlingMachineRecipe.SERIALIZER.getId(), BottlingMachineRecipeJS::new);
 		event.register(ClocheFertilizer.SERIALIZER.getId(), ClocheFertilizerRecipeJS::new);
 		event.register(ClocheRecipe.SERIALIZER.getId(), ClocheRecipeJS::new);
 		event.register(CokeOvenRecipe.SERIALIZER.getId(), CokeOvenRecipeJS::new);
