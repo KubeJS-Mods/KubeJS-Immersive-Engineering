@@ -1,17 +1,6 @@
 package dev.latvian.mods.kubejs.immersiveengineering;
 
-import blusunrize.immersiveengineering.api.crafting.AlloyRecipe;
-import blusunrize.immersiveengineering.api.crafting.ArcFurnaceRecipe;
-import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
-import blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe;
-import blusunrize.immersiveengineering.api.crafting.ClocheFertilizer;
-import blusunrize.immersiveengineering.api.crafting.ClocheRecipe;
-import blusunrize.immersiveengineering.api.crafting.CokeOvenRecipe;
-import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
-import blusunrize.immersiveengineering.api.crafting.MetalPressRecipe;
-import blusunrize.immersiveengineering.api.crafting.MixerRecipe;
-import blusunrize.immersiveengineering.api.crafting.SawmillRecipe;
-import blusunrize.immersiveengineering.api.crafting.SqueezerRecipe;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.energy.ThermoelectricSource;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.common.util.RecipeSerializers;
@@ -43,7 +32,7 @@ public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
 		event.register(ArcFurnaceRecipe.SERIALIZER.getId(), ArcFurnaceRecipeJS::new);
 		event.register(BlastFurnaceFuel.SERIALIZER.getId(), BlastFurnaceFuelRecipeJS::new);
 		event.register(BlastFurnaceRecipe.SERIALIZER.getId(), BlastFurnaceRecipeJS::new);
-		//event.register("immersiveengineering:blueprint", BlueprintCraftingRecipeSerializer::new);
+		event.register(BlueprintCraftingRecipe.SERIALIZER.getId(), BlueprintCraftingRecipeJS::new);
 		//event.register("immersiveengineering:bottling_machine", BottlingMachineRecipeSerializer::new);
 		event.register(ClocheFertilizer.SERIALIZER.getId(), ClocheFertilizerRecipeJS::new);
 		event.register(ClocheRecipe.SERIALIZER.getId(), ClocheRecipeJS::new);
@@ -56,7 +45,7 @@ public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
 		//event.register("immersiveengineering:refinery", RefineryRecipeSerializer::new);
 		event.register(SawmillRecipe.SERIALIZER.getId(), SawmillRecipeJS::new);
 		event.register(SqueezerRecipe.SERIALIZER.getId(), SqueezerRecipeJS::new);
-		//event.register(ThermoelectricSource.SERIALIZER.getId(), ThermoelectricSourceJS::new);
+		event.register(ThermoelectricSource.SERIALIZER.getId(), ThermoelectricSourceJS::new);
 
 		//event.register("immersivepetroleum:distillation", DistillationRecipeSerializer::new);
 		//event.register("immersivepetroleum:reservoirs", ReservoirTypeSerializer::new);
