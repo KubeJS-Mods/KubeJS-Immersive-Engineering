@@ -2,6 +2,7 @@ package dev.latvian.mods.kubejs.immersiveengineering;
 
 import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.energy.ThermoelectricSource;
+import blusunrize.immersiveengineering.api.energy.WindmillBiome;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.common.util.RecipeSerializers;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
@@ -38,17 +39,15 @@ public class ImmersiveEngineeringKubeJSPlugin extends KubeJSPlugin {
 		event.register(ClocheRecipe.SERIALIZER.getId(), ClocheRecipeJS::new);
 		event.register(CokeOvenRecipe.SERIALIZER.getId(), CokeOvenRecipeJS::new);
 		event.register(CrusherRecipe.SERIALIZER.getId(), CrusherRecipeJS::new);
-		//event.register("immersiveengineering:fermenter", FermenterRecipeSerializer::new);
+		event.register(FermenterRecipe.SERIALIZER.getId(), FermenterRecipeJS::new);
 		event.register(MetalPressRecipe.SERIALIZER.getId(), MetalPressRecipeJS::new);
 		//event.register("immersiveengineering:mineral_mix", MineralMixSerializer::new);
 		event.register(MixerRecipe.SERIALIZER.getId(), MixerRecipeJS::new);
-		//event.register("immersiveengineering:refinery", RefineryRecipeSerializer::new);
+		event.register(RefineryRecipe.SERIALIZER.getId(), RefineryRecipeJS::new);
 		event.register(SawmillRecipe.SERIALIZER.getId(), SawmillRecipeJS::new);
 		event.register(SqueezerRecipe.SERIALIZER.getId(), SqueezerRecipeJS::new);
 		event.register(ThermoelectricSource.SERIALIZER.getId(), ThermoelectricSourceJS::new);
-
-		//event.register("immersivepetroleum:distillation", DistillationRecipeSerializer::new);
-		//event.register("immersivepetroleum:reservoirs", ReservoirTypeSerializer::new);
+		event.register(WindmillBiome.SERIALIZER.getId(), WindmillBiomeJS::new);
 	}
 
 	@SubscribeEvent

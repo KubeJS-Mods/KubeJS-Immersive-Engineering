@@ -1,7 +1,7 @@
 package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.builders.ThermoelectricSourceBuilder;
-import dev.latvian.mods.kubejs.block.state.BlockStatePredicate;
+import blusunrize.immersiveengineering.api.crafting.builders.WindmillBiomeBuilder;
 import dev.latvian.mods.kubejs.recipe.IngredientMatch;
 import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
 import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
@@ -10,52 +10,46 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class ThermoelectricSourceJS extends IERecipeJS {
-
-    public ResourceLocation heatBlock;
-    public boolean isTag = false;
+public class WindmillBiomeJS extends IERecipeJS {
+    public ResourceLocation biome;
+    public boolean isTag;
 
     @Override
     public void create(RecipeArguments args) {
         String s = args.getString(0, "");
         if (s.startsWith("#")) {
             isTag = true;
-            heatBlock = new ResourceLocation(s.substring(1));
+            biome = new ResourceLocation(s.substring(1));
         } else {
-            heatBlock = new ResourceLocation(s);
+            biome = new ResourceLocation(s);
+        }
+        if (args.size() > 1) {
+            modifier(args.getFloat(1, 1.0f));
         }
     }
 
-    public ThermoelectricSourceJS kelvin(int temp) {
-        json.addProperty(ThermoelectricSourceBuilder.TEMPERATURE_KEY, temp);
+    public WindmillBiomeJS modifier(float mod) {
+        json.addProperty(WindmillBiomeBuilder.MODIFIER_KEY, mod);
         save();
         return this;
     }
 
-    public ThermoelectricSourceJS celsius(int temp) {
-        return kelvin(ThermoelectricSourceBuilder.TemperatureScale.CELSIUS.toKelvin(temp));
-    }
-
-    public ThermoelectricSourceJS fahrenheit(int temp) {
-        return kelvin(ThermoelectricSourceBuilder.TemperatureScale.FAHRENHEIT.toKelvin(temp));
-    }
-
     @Override
     public void deserialize() {
-        if (json.has(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY)) {
-            heatBlock = new ResourceLocation(json.get(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY).getAsString());
-        } else if (json.has(ThermoelectricSourceBuilder.BLOCK_TAG_KEY)) {
+        if (json.has(WindmillBiomeBuilder.SINGLE_BIOME_KEY)) {
+            biome = new ResourceLocation(json.get(WindmillBiomeBuilder.SINGLE_BIOME_KEY).getAsString());
+        } else if (json.has(WindmillBiomeBuilder.BIOME_TAG_KEY)) {
             isTag = true;
-            heatBlock = new ResourceLocation(json.get(ThermoelectricSourceBuilder.BLOCK_TAG_KEY).getAsString());
+            biome = new ResourceLocation(json.get(WindmillBiomeBuilder.BIOME_TAG_KEY).getAsString());
         }
     }
 
     @Override
     public void serialize() {
         if (isTag) {
-            json.addProperty(ThermoelectricSourceBuilder.BLOCK_TAG_KEY, heatBlock.toString());
+            json.addProperty(WindmillBiomeBuilder.BIOME_TAG_KEY, biome.toString());
         } else {
-            json.addProperty(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY, heatBlock.toString());
+            json.addProperty(WindmillBiomeBuilder.SINGLE_BIOME_KEY, biome.toString());
         }
     }
 

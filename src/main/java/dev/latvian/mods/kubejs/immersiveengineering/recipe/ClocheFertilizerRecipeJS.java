@@ -3,7 +3,6 @@ package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 import dev.latvian.mods.kubejs.recipe.IngredientMatch;
 import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 import net.minecraft.world.item.ItemStack;
 
 /**
