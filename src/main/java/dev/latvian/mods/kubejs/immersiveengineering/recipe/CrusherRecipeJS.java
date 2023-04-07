@@ -3,20 +3,23 @@ package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.ItemStackJS;
+import dev.latvian.mods.kubejs.recipe.RecipeArguments;
 import dev.latvian.mods.kubejs.util.ListJS;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 
 /**
  * @author LatvianModder
  */
 public class CrusherRecipeJS extends IERecipeJS {
 	@Override
-	public void create(ListJS args) {
-		outputItems.add(parseResultItem(args.get(0)));
-		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
+	public void create(RecipeArguments args) {
+		outputItems.add(parseItemOutput(args.get(0)));
+		inputItems.add(parseItemInput(args.get(1)));
 
 		if (args.size() >= 3) {
-			outputItems.addAll(parseResultItemList(args.get(2)));
+			outputItems.addAll(parseItemOutputList(args.get(2)));
 		}
 
 		json.addProperty("energy", 6000);
@@ -24,17 +27,17 @@ public class CrusherRecipeJS extends IERecipeJS {
 
 	@Override
 	public void deserialize() {
-		outputItems.add(parseResultItem(json.get("result")));
+		outputItems.add(parseItemOutput(json.get("result")));
 
 		if (json.has("secondaries")) {
 			for (var element : json.get("secondaries").getAsJsonArray()) {
 				var secondary = element.getAsJsonObject();
 
-				if (CraftingHelper.processConditions(secondary, "conditions")) {
-					ItemStackJS stack = parseResultItem(secondary.get("output"));
+				if (CraftingHelper.processConditions(secondary, "conditions", ICondition.IContext.EMPTY)) {
+					ItemStack stack = parseItemOutput(secondary.get("output"));
 
 					if (secondary.has("chance")) {
-						stack.setChance(secondary.get("chance").getAsDouble());
+						stack.kjs$setChance(secondary.get("chance").getAsDouble());
 					}
 
 					outputItems.add(stack);
@@ -42,22 +45,22 @@ public class CrusherRecipeJS extends IERecipeJS {
 			}
 		}
 
-		inputItems.add(parseIngredientItemIE(json.get("input")));
+		inputItems.add(parseItemInputIE(json.get("input")));
 	}
 
 	@Override
 	public void serialize() {
 		if (serializeOutputs) {
-			json.add("result", outputItems.get(0).toResultJson());
+			json.add("result", outputItems.get(0).toJsonJS());
 
 			var secondaries = new JsonArray();
 
 			for (int i = 1; i < outputItems.size(); i++) {
 				JsonObject o = new JsonObject();
-				ItemStackJS is = outputItems.get(i).copy();
-				o.addProperty("chance", is.hasChance() ? is.getChance() : 1D);
-				is.removeChance();
-				o.add("output", is.toResultJson());
+				ItemStack is = outputItems.get(i).copy();
+				o.addProperty("chance", Double.isNaN(is.kjs$getChance()) ? 1D : is.kjs$getChance());
+				is.kjs$setChance(Double.NaN);
+				o.add("output", is.toJsonJS());
 				secondaries.add(o);
 			}
 
@@ -65,7 +68,7 @@ public class CrusherRecipeJS extends IERecipeJS {
 		}
 
 		if (serializeInputs) {
-			json.add("input", inputItems.get(0).toJson());
+			json.add("input", serializeIngredientStack(inputItems.get(0).kjs$asStack()));
 		}
 	}
 }

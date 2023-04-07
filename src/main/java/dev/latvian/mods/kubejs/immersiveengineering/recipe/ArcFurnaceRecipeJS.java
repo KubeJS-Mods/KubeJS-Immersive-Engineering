@@ -1,6 +1,7 @@
 package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import com.google.gson.JsonArray;
+import dev.latvian.mods.kubejs.recipe.RecipeArguments;
 import dev.latvian.mods.kubejs.util.ListJS;
 
 /**
@@ -10,16 +11,16 @@ public class ArcFurnaceRecipeJS extends IERecipeJS {
 	private boolean hasSlag = false;
 
 	@Override
-	public void create(ListJS args) {
-		outputItems.addAll(parseResultItemList(args.get(0)));
-		inputItems.add(parseIngredientItem(args.get(1)).asIngredientStack());
+	public void create(RecipeArguments args) {
+		outputItems.addAll(parseItemOutputList(args.get(0)));
+		inputItems.add(parseItemInput(args.get(1)));
 
 		if (args.size() >= 3) {
-			inputItems.addAll(parseIngredientItemStackList(args.get(2)));
+			inputItems.addAll(parseItemInputList(args.get(2)));
 		}
 
 		if (args.size() >= 4) {
-			outputItems.add(parseResultItem(args.get(3)));
+			outputItems.add(parseItemOutput(args.get(3)));
 			hasSlag = true;
 		}
 
@@ -29,17 +30,17 @@ public class ArcFurnaceRecipeJS extends IERecipeJS {
 
 	@Override
 	public void deserialize() {
-		outputItems.addAll(parseResultItemList(json.get("results")));
-		inputItems.add(parseIngredientItemIE(json.get("input")));
+		outputItems.addAll(parseItemOutputList(json.get("results")));
+		inputItems.add(parseItemInputIE(json.get("input")));
 
 		if (json.has("additives")) {
 			for (var element : json.get("additives").getAsJsonArray()) {
-				inputItems.add(parseIngredientItemIE(element));
+				inputItems.add(parseItemInputIE(element));
 			}
 		}
 
 		if (json.has("slag")) {
-			outputItems.add(parseResultItem(json.get("slag")));
+			outputItems.add(parseItemOutput(json.get("slag")));
 			hasSlag = true;
 		}
 	}
@@ -50,23 +51,23 @@ public class ArcFurnaceRecipeJS extends IERecipeJS {
 			var results = new JsonArray();
 
 			for (int i = 0; i < (outputItems.size() - (hasSlag ? 1 : 0)); i++) {
-				results.add(outputItems.get(i).toResultJson());
+				results.add(outputItems.get(i).toJsonJS());
 			}
 
 			json.add("results", results);
 
 			if (hasSlag) {
-				json.add("slag", outputItems.get(outputItems.size() - 1).toResultJson());
+				json.add("slag", outputItems.get(outputItems.size() - 1).toJsonJS());
 			}
 		}
 
 		if (serializeInputs) {
-			json.add("input", inputItems.get(0).toJson());
+			json.add("input", serializeIngredientStack(inputItems.get(0).kjs$asStack()));
 
 			var additives = new JsonArray();
 
 			for (int i = 1; i < inputItems.size(); i++) {
-				additives.add(inputItems.get(i).toJson());
+				additives.add(serializeIngredientStack(inputItems.get(i).kjs$asStack()));
 			}
 
 			json.add("additives", additives);
