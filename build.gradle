@@ -118,6 +118,16 @@ publishing {
 	}
 
 	repositories {
+		if (ENV.FTB_MAVEN_TOKEN) {
+			maven {
+				url "https://maven.ftb.dev/release"
+				credentials {
+					username = "latvian"
+					password = "${ENV.FTB_MAVEN_TOKEN}"
+				}
+			}
+		}
+
 		if (ENV.SAPS_TOKEN) {
 			maven {
 				url "https://maven.saps.dev/minecraft"
@@ -140,7 +150,7 @@ if (ENV.CURSEFORGE_KEY) {
 			addGameVersion "1.19.2"
 			mainArtifact(remapJar.archivePath)
 			relations {
-				requiredDependency 'kubejs-forge'
+				requiredDependency 'kubejs'
 				requiredDependency 'immersive-engineering'
 			}
 			changelog = getGitChangelog
