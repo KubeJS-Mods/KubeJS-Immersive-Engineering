@@ -2,27 +2,44 @@ package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
 import dev.latvian.mods.kubejs.util.ListJS;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 
-/**
- * @author LatvianModder
- */
-public class CrusherRecipeJS extends IERecipeJS {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+
+public interface SawmillRecipeSchema {
+	public List<Boolean> stripping = new ArrayList<>();
+	public boolean hasStripped = false;
+
 	@Override
 	public void create(RecipeArguments args) {
 		outputItems.add(parseItemOutput(args.get(0)));
 		inputItems.add(parseItemInput(args.get(1)));
 
 		if (args.size() >= 3) {
-			outputItems.addAll(parseItemOutputList(args.get(2)));
+			for (var o : ListJS.orSelf(args.get(2))) {
+				if (o instanceof Map<?,?> m && m.containsKey("stripping") && m.containsKey("output")) {
+					outputItems.add(parseItemOutput(m.get("output")));
+					stripping.add((Boolean) m.get("stripping"));
+				} else {
+					outputItems.add(parseItemOutput(o));
+					stripping.add(false);
+				}
+			}
 		}
 
-		json.addProperty("energy", 6000);
+		if (args.size() >= 4) {
+			outputItems.add(parseItemOutput(args.get(3)));
+			hasStripped = true;
+		}
+
+		json.addProperty("energy", 1600);
 	}
 
 	@Override
@@ -31,16 +48,19 @@ public class CrusherRecipeJS extends IERecipeJS {
 
 		if (json.has("secondaries")) {
 			for (var element : json.get("secondaries").getAsJsonArray()) {
-				var secondary = element.getAsJsonObject();
+				JsonObject secondary = element.getAsJsonObject();
 
 				if (CraftingHelper.processConditions(secondary, "conditions", ICondition.IContext.EMPTY)) {
 					ItemStack stack = parseItemOutput(secondary.get("output"));
 
-					if (secondary.has("chance")) {
-						stack.kjs$setChance(secondary.get("chance").getAsDouble());
-					}
+					if (!stack.isEmpty()) {
+						if (secondary.has("chance")) {
+							stack.kjs$setChance(secondary.get("chance").getAsDouble());
+						}
 
-					outputItems.add(stack);
+						outputItems.add(stack);
+						stripping.add(secondary.has("stripping") && secondary.get("stripping").getAsBoolean());
+					}
 				}
 			}
 		}
@@ -55,16 +75,19 @@ public class CrusherRecipeJS extends IERecipeJS {
 
 			var secondaries = new JsonArray();
 
-			for (int i = 1; i < outputItems.size(); i++) {
+			for (int i = 1; i < (outputItems.size() - (hasStripped ? 1 : 0)); i++) {
 				JsonObject o = new JsonObject();
 				ItemStack is = outputItems.get(i).copy();
-				o.addProperty("chance", Double.isNaN(is.kjs$getChance()) ? 1D : is.kjs$getChance());
-				is.kjs$setChance(Double.NaN);
+				o.addProperty("stripping", stripping.get(i - 1));
 				o.add("output", is.toJsonJS());
 				secondaries.add(o);
 			}
 
 			json.add("secondaries", secondaries);
+
+			if (hasStripped) {
+				json.add("stripped", outputItems.get(outputItems.size() - 1).toJsonJS());
+			}
 		}
 
 		if (serializeInputs) {

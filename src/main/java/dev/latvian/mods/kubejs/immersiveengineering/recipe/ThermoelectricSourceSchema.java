@@ -1,7 +1,6 @@
 package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.builders.ThermoelectricSourceBuilder;
-import dev.latvian.mods.kubejs.block.state.BlockStatePredicate;
 import dev.latvian.mods.kubejs.recipe.IngredientMatch;
 import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
 import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
@@ -10,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class ThermoelectricSourceJS extends IERecipeJS {
+public interface ThermoelectricSourceSchema {
 
     public ResourceLocation heatBlock;
     public boolean isTag = false;
@@ -26,17 +25,17 @@ public class ThermoelectricSourceJS extends IERecipeJS {
         }
     }
 
-    public ThermoelectricSourceJS kelvin(int temp) {
+    public ThermoelectricSourceSchema kelvin(int temp) {
         json.addProperty(ThermoelectricSourceBuilder.TEMPERATURE_KEY, temp);
         save();
         return this;
     }
 
-    public ThermoelectricSourceJS celsius(int temp) {
+    public ThermoelectricSourceSchema celsius(int temp) {
         return kelvin(ThermoelectricSourceBuilder.TemperatureScale.CELSIUS.toKelvin(temp));
     }
 
-    public ThermoelectricSourceJS fahrenheit(int temp) {
+    public ThermoelectricSourceSchema fahrenheit(int temp) {
         return kelvin(ThermoelectricSourceBuilder.TemperatureScale.FAHRENHEIT.toKelvin(temp));
     }
 

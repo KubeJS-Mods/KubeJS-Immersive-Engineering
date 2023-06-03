@@ -2,9 +2,7 @@ package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.ClocheRenderFunction;
 import com.google.gson.JsonArray;
-import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 import dev.latvian.mods.kubejs.util.MapJS;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -12,10 +10,8 @@ import net.minecraft.world.level.block.Blocks;
 
 import javax.annotation.Nullable;
 
-/**
- * @author LatvianModder
- */
-public class ClocheRecipeJS extends IERecipeJS {
+// FIXME
+public interface ClocheRecipeSchema {
 	public ClocheRenderFunction.ClocheRenderReference renderReference;
 
 	@Override
@@ -27,7 +23,7 @@ public class ClocheRecipeJS extends IERecipeJS {
 		render(args.size() >= 4 ? args.get(3) : null);
 	}
 
-	public ClocheRecipeJS render(@Nullable Object o) {
+	public ClocheRecipeSchema render(@Nullable Object o) {
 		renderReference = null;
 
 		try {

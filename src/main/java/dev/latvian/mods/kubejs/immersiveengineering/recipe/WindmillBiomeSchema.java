@@ -1,6 +1,5 @@
 package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.builders.ThermoelectricSourceBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.WindmillBiomeBuilder;
 import dev.latvian.mods.kubejs.recipe.IngredientMatch;
 import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
@@ -10,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class WindmillBiomeJS extends IERecipeJS {
+public interface WindmillBiomeSchema {
     public ResourceLocation biome;
     public boolean isTag;
 
@@ -28,7 +27,7 @@ public class WindmillBiomeJS extends IERecipeJS {
         }
     }
 
-    public WindmillBiomeJS modifier(float mod) {
+    public WindmillBiomeSchema modifier(float mod) {
         json.addProperty(WindmillBiomeBuilder.MODIFIER_KEY, mod);
         save();
         return this;

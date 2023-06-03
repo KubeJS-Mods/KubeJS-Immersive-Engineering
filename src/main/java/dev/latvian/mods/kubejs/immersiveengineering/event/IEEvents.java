@@ -7,5 +7,5 @@ import dev.latvian.mods.kubejs.event.Extra;
 public interface IEEvents {
     EventGroup GROUP = EventGroup.of("IEEvents");
 
-    EventHandler MULTIBLOCK_FORM = IEEvents.GROUP.startup("multiblockForm", () -> MultiblockFormEventJS.class).extra(Extra.ID).cancelable();
+    EventHandler MULTIBLOCK_FORM = IEEvents.GROUP.startup("multiblockForm", () -> MultiblockFormEventJS.class).extra(Extra.ID).hasResult();
 }

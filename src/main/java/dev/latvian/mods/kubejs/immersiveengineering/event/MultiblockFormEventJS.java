@@ -9,8 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 public class MultiblockFormEventJS extends PlayerEventJS {
-	public static final String ID = "ie.multiblock.form";
-
 	private final MultiblockHandler.MultiblockFormEvent event;
 
 	public MultiblockFormEventJS(MultiblockHandler.MultiblockFormEvent event) {
