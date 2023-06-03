@@ -17,7 +17,7 @@ public interface SqueezerRecipeSchema {
 	RecipeKey<InputItem> INPUT = ItemComponents.INPUT.key("input");
 	RecipeKey<Integer> ENERGY = IERecipes.energy(2400);
 
-	RecipeKey<Either<OutputFluid, OutputItem>[]> FLUID_OR_RESULT = new OrRecipeComponent<>(FLUID.component, RESULT.component).asArray().key("fluid_or_result"); // used for JS constructor
+	RecipeKey<Either<OutputFluid, OutputItem>[]> FLUID_OR_RESULT = FluidComponents.OUTPUT_OR_ITEM_ARRAY.key("fluid_or_result"); // used for JS constructor
 
 	RecipeConstructor.Factory FACTORY = (recipe, schemaType, keys, from) -> {
 		recipe.setValue(INPUT, from.getValue(recipe, INPUT));
