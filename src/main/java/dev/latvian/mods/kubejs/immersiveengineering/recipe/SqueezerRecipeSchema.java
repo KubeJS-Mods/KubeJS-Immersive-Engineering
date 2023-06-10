@@ -7,14 +7,13 @@ import dev.latvian.mods.kubejs.item.OutputItem;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.component.FluidComponents;
 import dev.latvian.mods.kubejs.recipe.component.ItemComponents;
-import dev.latvian.mods.kubejs.recipe.component.OrRecipeComponent;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeConstructor;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 
 public interface SqueezerRecipeSchema {
+	RecipeKey<InputItem> INPUT = ItemComponents.INPUT.key("input");
 	RecipeKey<OutputFluid> FLUID = FluidComponents.OUTPUT.key("fluid").defaultOptional();
 	RecipeKey<OutputItem> RESULT = ItemComponents.OUTPUT.key("result").defaultOptional();
-	RecipeKey<InputItem> INPUT = ItemComponents.INPUT.key("input");
 	RecipeKey<Integer> ENERGY = IERecipes.energy(2400);
 
 	RecipeKey<Either<OutputFluid, OutputItem>[]> FLUID_OR_RESULT = FluidComponents.OUTPUT_OR_ITEM_ARRAY.key("fluid_or_result"); // used for JS constructor
@@ -32,6 +31,6 @@ public interface SqueezerRecipeSchema {
 		}
 	};
 
-	RecipeSchema SCHEMA = new RecipeSchema(IERecipeJS.class, IERecipeJS::new, FLUID, RESULT, INPUT, ENERGY)
-			.constructor(FACTORY, FLUID_OR_RESULT, INPUT, ENERGY);
+	RecipeSchema SCHEMA = new RecipeSchema(IERecipeJS.class, IERecipeJS::new, INPUT, FLUID, RESULT, ENERGY)
+								  .constructor(FACTORY, FLUID_OR_RESULT, INPUT, ENERGY);
 }
