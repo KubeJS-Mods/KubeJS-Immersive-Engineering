@@ -1,80 +1,28 @@
 package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.builders.ThermoelectricSourceBuilder;
-import dev.latvian.mods.kubejs.recipe.IngredientMatch;
-import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
-import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
-import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
+import dev.latvian.mods.kubejs.recipe.RecipeJS;
+import dev.latvian.mods.kubejs.recipe.RecipeKey;
+import dev.latvian.mods.kubejs.recipe.component.NumberComponent;
+import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 
 public interface ThermoelectricSourceSchema {
+    class ThermoelectricSourceRecipeJS extends IERecipeJS {
+        public RecipeJS kelvin(int temp) {
+            return setValue(TEMPERATURE, temp);
+        }
 
-    public ResourceLocation heatBlock;
-    public boolean isTag = false;
+        public RecipeJS celsius(int temp) {
+            return kelvin(ThermoelectricSourceBuilder.TemperatureScale.CELSIUS.toKelvin(temp));
+        }
 
-    @Override
-    public void create(RecipeArguments args) {
-        String s = args.getString(0, "");
-        if (s.startsWith("#")) {
-            isTag = true;
-            heatBlock = new ResourceLocation(s.substring(1));
-        } else {
-            heatBlock = new ResourceLocation(s);
+        public RecipeJS fahrenheit(int temp) {
+            return kelvin(ThermoelectricSourceBuilder.TemperatureScale.FAHRENHEIT.toKelvin(temp));
         }
     }
 
-    public ThermoelectricSourceSchema kelvin(int temp) {
-        json.addProperty(ThermoelectricSourceBuilder.TEMPERATURE_KEY, temp);
-        save();
-        return this;
-    }
+    RecipeKey<IERecipes.HeatSource> HEAT_SOURCE = IERecipes.HEAT_SOURCE_COMPONENT.key("heat_source");
+    RecipeKey<Integer> TEMPERATURE = NumberComponent.INT.key(ThermoelectricSourceBuilder.TEMPERATURE_KEY).alwaysWrite();
 
-    public ThermoelectricSourceSchema celsius(int temp) {
-        return kelvin(ThermoelectricSourceBuilder.TemperatureScale.CELSIUS.toKelvin(temp));
-    }
-
-    public ThermoelectricSourceSchema fahrenheit(int temp) {
-        return kelvin(ThermoelectricSourceBuilder.TemperatureScale.FAHRENHEIT.toKelvin(temp));
-    }
-
-    @Override
-    public void deserialize() {
-        if (json.has(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY)) {
-            heatBlock = new ResourceLocation(json.get(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY).getAsString());
-        } else if (json.has(ThermoelectricSourceBuilder.BLOCK_TAG_KEY)) {
-            isTag = true;
-            heatBlock = new ResourceLocation(json.get(ThermoelectricSourceBuilder.BLOCK_TAG_KEY).getAsString());
-        }
-    }
-
-    @Override
-    public void serialize() {
-        if (isTag) {
-            json.addProperty(ThermoelectricSourceBuilder.BLOCK_TAG_KEY, heatBlock.toString());
-        } else {
-            json.addProperty(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY, heatBlock.toString());
-        }
-    }
-
-    @Override
-    public boolean hasInput(IngredientMatch match) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceInput(IngredientMatch match, Ingredient with, ItemInputTransformer transformer) {
-        return false;
-    }
-
-    @Override
-    public boolean hasOutput(IngredientMatch match) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceOutput(IngredientMatch match, ItemStack with, ItemOutputTransformer transformer) {
-        return false;
-    }
+    RecipeSchema SCHEMA = new RecipeSchema(ThermoelectricSourceRecipeJS.class, ThermoelectricSourceRecipeJS::new, HEAT_SOURCE, TEMPERATURE);
 }
