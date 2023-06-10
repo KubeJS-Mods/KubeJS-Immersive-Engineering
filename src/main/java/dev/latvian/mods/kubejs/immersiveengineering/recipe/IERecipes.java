@@ -39,7 +39,7 @@ public interface IERecipes {
 	}
 
 	static RecipeKey<Integer> energy(int def) {
-		return energy().optional(def);
+		return energy().optional(def).alwaysWrite();
 	}
 
 	RecipeComponent<ClocheRenderFunction.ClocheRenderReference> RENDER_COMPONENT = new RecipeComponent<>() {
