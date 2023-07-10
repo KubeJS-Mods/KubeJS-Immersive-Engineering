@@ -19,6 +19,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
+import java.util.Map;
+
 public interface IERecipes {
 	record HeatSource(ResourceLocation id, boolean tag) {
 	}
@@ -108,11 +110,20 @@ public interface IERecipes {
 		}
 
 		@Override
-		public HeatSource readFromJson(RecipeJS recipe, RecipeKey<HeatSource> key, JsonObject json) {
+		public void readFromJson(RecipeComponentValue<HeatSource> cv, JsonObject json) {
 			if (json.has(ThermoelectricSourceBuilder.BLOCK_TAG_KEY)) {
-				return new HeatSource(new ResourceLocation(json.get(ThermoelectricSourceBuilder.BLOCK_TAG_KEY).getAsString()), true);
+				cv.value = new HeatSource(new ResourceLocation(json.get(ThermoelectricSourceBuilder.BLOCK_TAG_KEY).getAsString()), true);
 			} else {
-				return new HeatSource(new ResourceLocation(json.get(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY).getAsString()), false);
+				cv.value = new HeatSource(new ResourceLocation(json.get(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY).getAsString()), false);
+			}
+		}
+
+		@Override
+		public void readFromMap(RecipeComponentValue<HeatSource> cv, Map<?, ?> map) {
+			if (map.containsKey(ThermoelectricSourceBuilder.BLOCK_TAG_KEY)) {
+				cv.value = new HeatSource(new ResourceLocation(map.get(ThermoelectricSourceBuilder.BLOCK_TAG_KEY).toString()), true);
+			} else {
+				cv.value = new HeatSource(new ResourceLocation(map.get(ThermoelectricSourceBuilder.SINGLE_BLOCK_KEY).toString()), false);
 			}
 		}
 	};
@@ -157,11 +168,20 @@ public interface IERecipes {
 		}
 
 		@Override
-		public BiomeFilter readFromJson(RecipeJS recipe, RecipeKey<BiomeFilter> key, JsonObject json) {
+		public void readFromJson(RecipeComponentValue<BiomeFilter> cv, JsonObject json) {
 			if (json.has(WindmillBiomeBuilder.BIOME_TAG_KEY)) {
-				return new BiomeFilter(new ResourceLocation(json.get(WindmillBiomeBuilder.BIOME_TAG_KEY).getAsString()), true);
+				cv.value = new BiomeFilter(new ResourceLocation(json.get(WindmillBiomeBuilder.BIOME_TAG_KEY).getAsString()), true);
 			} else {
-				return new BiomeFilter(new ResourceLocation(json.get(WindmillBiomeBuilder.SINGLE_BIOME_KEY).getAsString()), false);
+				cv.value = new BiomeFilter(new ResourceLocation(json.get(WindmillBiomeBuilder.SINGLE_BIOME_KEY).getAsString()), false);
+			}
+		}
+
+		@Override
+		public void readFromMap(RecipeComponentValue<BiomeFilter> cv, Map<?, ?> map) {
+			if (map.containsKey(WindmillBiomeBuilder.BIOME_TAG_KEY)) {
+				cv.value = new BiomeFilter(new ResourceLocation(map.get(WindmillBiomeBuilder.BIOME_TAG_KEY).toString()), true);
+			} else {
+				cv.value = new BiomeFilter(new ResourceLocation(map.get(WindmillBiomeBuilder.SINGLE_BIOME_KEY).toString()), false);
 			}
 		}
 	};
