@@ -101,7 +101,7 @@ public interface IERecipes {
 		}
 
 		@Override
-		public void writeToJson(RecipeComponentValue<HeatSource> value, JsonObject json) {
+		public void writeToJson(RecipeJS recipe, RecipeComponentValue<HeatSource> value, JsonObject json) {
 			if (value.value.tag) {
 				json.addProperty(ThermoelectricSourceBuilder.BLOCK_TAG_KEY, value.value.id.toString());
 			} else {
@@ -110,7 +110,7 @@ public interface IERecipes {
 		}
 
 		@Override
-		public void readFromJson(RecipeComponentValue<HeatSource> cv, JsonObject json) {
+		public void readFromJson(RecipeJS recipe, RecipeComponentValue<HeatSource> cv, JsonObject json) {
 			if (json.has(ThermoelectricSourceBuilder.BLOCK_TAG_KEY)) {
 				cv.value = new HeatSource(new ResourceLocation(json.get(ThermoelectricSourceBuilder.BLOCK_TAG_KEY).getAsString()), true);
 			} else {
@@ -119,7 +119,7 @@ public interface IERecipes {
 		}
 
 		@Override
-		public void readFromMap(RecipeComponentValue<HeatSource> cv, Map<?, ?> map) {
+		public void readFromMap(RecipeJS recipe, RecipeComponentValue<HeatSource> cv, Map<?, ?> map) {
 			if (map.containsKey(ThermoelectricSourceBuilder.BLOCK_TAG_KEY)) {
 				cv.value = new HeatSource(new ResourceLocation(map.get(ThermoelectricSourceBuilder.BLOCK_TAG_KEY).toString()), true);
 			} else {
@@ -159,7 +159,7 @@ public interface IERecipes {
 		}
 
 		@Override
-		public void writeToJson(RecipeComponentValue<BiomeFilter> value, JsonObject json) {
+		public void writeToJson(RecipeJS recipe, RecipeComponentValue<BiomeFilter> value, JsonObject json) {
 			if (value.value.tag) {
 				json.addProperty(WindmillBiomeBuilder.BIOME_TAG_KEY, value.value.id.toString());
 			} else {
@@ -168,7 +168,7 @@ public interface IERecipes {
 		}
 
 		@Override
-		public void readFromJson(RecipeComponentValue<BiomeFilter> cv, JsonObject json) {
+		public void readFromJson(RecipeJS recipe, RecipeComponentValue<BiomeFilter> cv, JsonObject json) {
 			if (json.has(WindmillBiomeBuilder.BIOME_TAG_KEY)) {
 				cv.value = new BiomeFilter(new ResourceLocation(json.get(WindmillBiomeBuilder.BIOME_TAG_KEY).getAsString()), true);
 			} else {
@@ -177,7 +177,7 @@ public interface IERecipes {
 		}
 
 		@Override
-		public void readFromMap(RecipeComponentValue<BiomeFilter> cv, Map<?, ?> map) {
+		public void readFromMap(RecipeJS recipe, RecipeComponentValue<BiomeFilter> cv, Map<?, ?> map) {
 			if (map.containsKey(WindmillBiomeBuilder.BIOME_TAG_KEY)) {
 				cv.value = new BiomeFilter(new ResourceLocation(map.get(WindmillBiomeBuilder.BIOME_TAG_KEY).toString()), true);
 			} else {

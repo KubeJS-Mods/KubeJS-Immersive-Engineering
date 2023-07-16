@@ -3,6 +3,7 @@ package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.item.OutputItem;
+import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.component.ItemComponents;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
@@ -20,7 +21,7 @@ public interface MetalPressRecipeSchema {
 		}
 
 		@Override
-		public void writeToJson(RecipeComponentValue<OutputItem> value, JsonObject json) {
+		public void writeToJson(RecipeJS recipe, RecipeComponentValue<OutputItem> value, JsonObject json) {
 			var output = value.value.item;
 			if (!output.isEmpty()) {
 				json.addProperty("mold", output.kjs$getId());

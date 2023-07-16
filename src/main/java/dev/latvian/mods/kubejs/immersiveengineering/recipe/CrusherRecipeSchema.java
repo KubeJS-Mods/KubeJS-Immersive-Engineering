@@ -3,6 +3,7 @@ package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.item.OutputItem;
+import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.component.ItemComponents;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
@@ -22,9 +23,9 @@ public interface CrusherRecipeSchema {
 		}
 
 		@Override
-		public void readFromJson(RecipeComponentValue<OutputItem> cv, JsonObject json) {
+		public void readFromJson(RecipeJS recipe, RecipeComponentValue<OutputItem> cv, JsonObject json) {
 			if (CraftingHelper.processConditions(json, "conditions", ICondition.IContext.EMPTY)) {
-				cv.value = cv.recipe.readOutputItem(json);
+				cv.value = recipe.readOutputItem(json);
 
 				if (json.has("chance")) {
 					cv.value = cv.value.withChance(json.get("chance").getAsDouble());
@@ -35,9 +36,9 @@ public interface CrusherRecipeSchema {
 		}
 
 		@Override
-		public void writeToJson(RecipeComponentValue<OutputItem> cv, JsonObject json) {
+		public void writeToJson(RecipeJS recipe, RecipeComponentValue<OutputItem> cv, JsonObject json) {
 			if (!cv.value.isEmpty()) {
-				json.add("output", cv.recipe.writeOutputItem(cv.value));
+				json.add("output", recipe.writeOutputItem(cv.value));
 				if (cv.value.hasChance()) {
 					json.addProperty("chance", cv.value.getChance());
 				}
