@@ -22,7 +22,7 @@ public interface ThermoelectricSourceSchema {
     }
 
     RecipeKey<IERecipes.HeatSource> HEAT_SOURCE = IERecipes.HEAT_SOURCE_COMPONENT.key("heat_source");
-    RecipeKey<Integer> TEMPERATURE = NumberComponent.INT.key(ThermoelectricSourceBuilder.TEMPERATURE_KEY).alwaysWrite();
+	RecipeKey<Integer> TEMPERATURE = NumberComponent.INT.key(ThermoelectricSourceBuilder.TEMPERATURE_KEY);
 
     RecipeSchema SCHEMA = new RecipeSchema(ThermoelectricSourceRecipeJS.class, ThermoelectricSourceRecipeJS::new, HEAT_SOURCE, TEMPERATURE);
 }

@@ -1,0 +1,9 @@
+[
+	{
+		"event": "multiblockForm",
+		"scripts": "startup",
+		"type": "dev.latvian.mods.kubejs.immersiveengineering.event.MultiblockFormEventJS",
+		"extra": "kubejs:id",
+		"hasResult": true
+	}
+]

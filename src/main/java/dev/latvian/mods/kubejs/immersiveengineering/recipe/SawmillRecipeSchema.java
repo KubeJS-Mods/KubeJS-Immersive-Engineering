@@ -62,7 +62,7 @@ public interface SawmillRecipeSchema {
 	RecipeKey<OutputItem> RESULT = ItemComponents.OUTPUT.key("result");
 	RecipeKey<InputItem> INPUT = ItemComponents.INPUT.key("input");
 	RecipeKey<Either<OutputItem, OutputItem>[]> SECONDARIES = STRIPPING_OUTPUT_ITEM.or(ItemComponents.OUTPUT).asArray().key("secondaries");
-	RecipeKey<OutputItem> STRIPPED = ItemComponents.OUTPUT.key("stripped").allowEmpty().optional(OutputItem.EMPTY);
+	RecipeKey<OutputItem> STRIPPED = ItemComponents.OUTPUT.key("stripped").defaultOptional();
 	RecipeKey<Integer> ENERGY = IERecipes.energy(1600);
 
 	RecipeSchema SCHEMA = new RecipeSchema(IERecipeJS.class, IERecipeJS::new, RESULT, INPUT, SECONDARIES, STRIPPED, ENERGY);

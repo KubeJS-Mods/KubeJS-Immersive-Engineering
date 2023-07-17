@@ -35,7 +35,7 @@ public interface MetalPressRecipeSchema {
 
 	RecipeKey<OutputItem> RESULT = ItemComponents.OUTPUT.key("result");
 	RecipeKey<InputItem> INPUT = ItemComponents.INPUT.key("input");
-	RecipeKey<OutputItem> MOLD = MOLD_COMPONENT.key("mold").allowEmpty().optional(OutputItem.EMPTY);
+	RecipeKey<OutputItem> MOLD = MOLD_COMPONENT.key("mold").defaultOptional();
 	RecipeKey<Integer> ENERGY = IERecipes.energy(2400);
 
 	RecipeSchema SCHEMA = new RecipeSchema(IERecipeJS.class, IERecipeJS::new, RESULT, INPUT, MOLD, ENERGY);

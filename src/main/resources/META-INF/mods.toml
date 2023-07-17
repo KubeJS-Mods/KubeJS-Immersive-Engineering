@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
-issueTrackerURL = "https://github.com/KubeJS-Mods/KubeJS-Immersive-Engineering/issues"
+issueTrackerURL = "https://kubejs.com/support?source=kubejs_immersive_engineering&mc=1902&loader=forge"
 license = "GNU LGPLv3"
 
 [[mods]]
@@ -16,7 +16,7 @@ license = "GNU LGPLv3"
 [[dependencies.kubejs_immersive_engineering]]
 modId = "kubejs"
 mandatory = true
-versionRange = "[1902.6.0-build.140,)"
+versionRange = "[1902.6.1-build.284,)"
 ordering = "AFTER"
 side = "BOTH"
 

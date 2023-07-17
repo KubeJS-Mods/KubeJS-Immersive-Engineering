@@ -24,10 +24,9 @@ loom {
 
 repositories {
 	maven {
-		url "https://maven.architectury.dev/"
+		url "https://www.cursemaven.com"
 		content {
-			includeGroup "me.shedaniel"
-			includeGroup "me.shedaniel.cloth"
+			includeGroup "curse.maven"
 		}
 	}
 
@@ -55,9 +54,11 @@ dependencies {
 	modApi "dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}"
 	modApi "blusunrize.immersiveengineering:ImmersiveEngineering:${project.ie_version}"
 
-	modLocalRuntime "me.shedaniel:RoughlyEnoughItems-forge:9.+"
+	// modLocalRuntime "me.shedaniel:RoughlyEnoughItems-forge:9.+"
+	// modLocalRuntime "me.shedaniel:RoughlyEnoughItems-forge:9.+"
 
 	//modApi "curse.maven:immersive-petroleum-268250:3384353"
+	modLocalRuntime("curse.maven:jei-238222:4494410")
 }
 
 processResources {

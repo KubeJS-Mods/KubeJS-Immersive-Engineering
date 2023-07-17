@@ -12,5 +12,8 @@
 			"name": "Forge",
 			"url": "https://maven.saps.dev/releases/dev/latvian/mods/kubejs-immersive-engineering/{version}/kubejs-immersive-engineering-{version}.jar"
 		}
+	],
+	"event_groups": [
+		"IEEvents"
 	]
 }
