@@ -88,4 +88,13 @@ public class IERecipeJS extends RecipeJS {
 
 		throw new RecipeExceptionJS("[%s] Failed to read IE input fluid from %s! Note that Immersive Engineering only accepts fluid tags as inputs!".formatted(type.id, from));
 	}
+
+	@Override
+	public JsonElement writeInputFluid(InputFluid value) {
+		if (value instanceof IEInputFluid in) {
+			return in.input().serialize();
+		}
+
+		throw new RecipeExceptionJS("[%s] Failed to write IE input fluid from %s! Note that Immersive Engineering only accepts fluid tags as inputs!".formatted(type.id, value));
+	}
 }
