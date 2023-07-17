@@ -49,7 +49,7 @@ public class IERecipeJS extends RecipeJS {
 
 			return super.readOutputItem(from);
 		} catch (Exception ex) {
-			ConsoleJS.SERVER.error("Failed to read IE output item from " + from, ex, RecipesEventJS.SKIP_ERROR);
+			ConsoleJS.SERVER.error("[%s] Failed to read IE output item from %s".formatted(type.id, from), ex, RecipesEventJS.SKIP_ERROR);
 			return OutputItem.EMPTY;
 		}
 	}

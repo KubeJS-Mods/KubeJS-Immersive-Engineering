@@ -1,5 +1,6 @@
 package dev.latvian.mods.kubejs.immersiveengineering.recipe;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.item.OutputItem;
@@ -7,7 +8,6 @@ import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.component.ItemComponents;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
-import dev.latvian.mods.kubejs.recipe.component.RecipeComponentValue;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponentWithParent;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -23,26 +23,29 @@ public interface CrusherRecipeSchema {
 		}
 
 		@Override
-		public void readFromJson(RecipeJS recipe, RecipeComponentValue<OutputItem> cv, JsonObject json) {
-			if (CraftingHelper.processConditions(json, "conditions", ICondition.IContext.EMPTY)) {
-				cv.value = recipe.readOutputItem(json);
-
-				if (json.has("chance")) {
-					cv.value = cv.value.withChance(json.get("chance").getAsDouble());
-				}
-			} else {
-				cv.value = OutputItem.EMPTY;
+		public JsonElement write(RecipeJS recipe, OutputItem value) {
+			JsonObject json = new JsonObject();
+			json.add("output", RecipeComponentWithParent.super.write(recipe, value));
+			if (value.hasChance()) {
+				json.addProperty("chance", value.getChance());
 			}
+			return json;
 		}
 
 		@Override
-		public void writeToJson(RecipeJS recipe, RecipeComponentValue<OutputItem> cv, JsonObject json) {
-			if (!cv.value.isEmpty()) {
-				json.add("output", recipe.writeOutputItem(cv.value));
-				if (cv.value.hasChance()) {
-					json.addProperty("chance", cv.value.getChance());
+		public OutputItem read(RecipeJS recipe, Object from) {
+			if (from instanceof JsonObject json) {
+				var output = OutputItem.EMPTY;
+				if (CraftingHelper.processConditions(json, "conditions", ICondition.IContext.EMPTY)) {
+					output = RecipeComponentWithParent.super.read(recipe, json.get("output"));
+
+					if (json.has("chance")) {
+						output = output.withChance(json.get("chance").getAsDouble());
+					}
 				}
+				return output;
 			}
+			return RecipeComponentWithParent.super.read(recipe, from);
 		}
 
 		public String toString() {
