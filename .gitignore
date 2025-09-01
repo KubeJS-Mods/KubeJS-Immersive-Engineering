@@ -17,8 +17,16 @@ out
 build
 .gradle
 logs
+*.log
 
 # other
 eclipse
-run
+/runs
 .vscode
+
+# metadata (macOS)
+.DS_Store
+
+# metadata (windows)
+Thumbs.db
+desktop.ini

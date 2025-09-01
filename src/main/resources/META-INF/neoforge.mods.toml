@@ -1,0 +1,30 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+issueTrackerURL = "https://kubejs.com/support?source=kubejs_immersive_engineering&mc=2101&loader=neoforge"
+license = "MIT"
+
+[[mods]]
+modId = "kubejs_immersive_engineering"
+version = "${version}"
+displayName = "KubeJS Immersive Engineering"
+authors = "latvian.dev"
+description = '''
+KubeJS Immersive Engineering integration
+'''
+logoFile = "kubejs_immersive_engineering_logo.png"
+modUrl = "https://kubejs.com"
+displayURL = "https://kubejs.com"
+
+[[dependencies.kubejs_immersive_engineering]]
+modId = "kubejs"
+mandatory = true
+versionRange = "[${kubejs_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.kubejs_immersive_engineering]]
+modId = "immersiveengineering"
+mandatory = true
+versionRange = "[${immersive_engineering_version},)"
+ordering = "AFTER"
+side = "BOTH"

@@ -1,9 +1,13 @@
 pluginManagement {
 	repositories {
-		maven { url "https://maven.creeperhost.net/" }
-		maven { url "https://maven.shedaniel.me/" }
 		gradlePluginPortal()
+		mavenCentral()
+		maven { url "https://maven.creeperhost.net/" }
 	}
 }
 
-rootProject.name = 'KubeJS-Immersive-Engineering-1.19.2'
+plugins {
+	id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+rootProject.name = 'KubeJS-Immersive-Engineering-1.21.1'

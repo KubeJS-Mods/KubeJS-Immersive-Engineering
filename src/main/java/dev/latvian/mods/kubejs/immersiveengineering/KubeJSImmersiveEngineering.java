@@ -1,7 +1,6 @@
 package dev.latvian.mods.kubejs.immersiveengineering;
 
-import net.minecraftforge.fml.common.Mod;
-
+import net.neoforged.fml.common.Mod;
 
 @Mod(KubeJSImmersiveEngineering.MOD_ID)
 public class KubeJSImmersiveEngineering {
